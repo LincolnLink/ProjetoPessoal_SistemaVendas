@@ -1,0 +1,19 @@
+
+
+<form (ngSubmit)="onSubmit()" [formGroup]="formulario" >
+
+  <div>
+    <label>Nome: </label>
+    <input type="text" formControlName="nome" id="nome" name="nome" >
+  </div>
+
+  <div>
+    <label>Valor: </label>
+    <input type="number" formControlName="valorUnitario" id="valorUnitario" name="valorUnitario" >
+  </div>
+<br>
+  <button type="submit">Salvar</button>
+<br><br><br>
+  <a (click)="onCancel()">Cancelar</a>
+
+</form>
