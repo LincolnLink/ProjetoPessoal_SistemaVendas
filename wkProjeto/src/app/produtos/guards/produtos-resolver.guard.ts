@@ -6,12 +6,14 @@ import { Produtos } from "src/app/shared/Entidades/classes/produtosData";
 import { ProdutosService } from './../../shared/service/produtos.service';
 import { Observable } from 'rxjs';
 import { filter, map, switchMap, take } from "rxjs/operators";
-
+ /*
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProdutoResolverGuard implements Resolve<Produtos> {
+
+
 
   produto: Produtos = {} as Produtos;
 
@@ -28,7 +30,7 @@ export class ProdutoResolverGuard implements Resolve<Produtos> {
     state: RouterStateSnapshot
     ): Produtos {
 
-      /*this.listProdutos = this.produtosService.getAll();*/
+      //this.listProdutos = this.produtosService.getAll();
 
       this.listProdutos.pipe(
        map((v: Produtos) =>  ({
@@ -65,7 +67,7 @@ export class ProdutoResolverGuard implements Resolve<Produtos> {
       {
         return this.produto;
       }
-*/
+
       // Situação aonde é criado um curso novo!
       // O operador "of()" do RXJS, serve para retornar
       // um observable apartir de um objeto!
@@ -76,3 +78,4 @@ export class ProdutoResolverGuard implements Resolve<Produtos> {
   }
 
 }
+ */
