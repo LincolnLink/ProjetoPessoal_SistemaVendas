@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Produtos } from '../Entidades/classes/produtosData';
 import { map } from "rxjs/operators";
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,8 @@ export class ProdutosService {
 
   produto: Produtos = {} as Produtos;
 
+  listPordutos!: Observable<Produtos[]>;
+
   constructor(private db: AngularFireDatabase) { }
 
   // Busca todos e com push adiciona o novo na lista
@@ -18,7 +20,7 @@ export class ProdutosService {
   insert(produtos: Produtos){
     this.produto = produtos
 
-    this.db.list('produtos').push(produtos)
+    this.db.list<Produtos>('Produtos').push(produtos)
     .then((result: any) => {
 
       console.log(result.key);
@@ -26,14 +28,14 @@ export class ProdutosService {
 
       this.produto.idProduto = result.key;
       this.update(this.produto, result.key);
-      this.produto = new Produtos();
+
 
     });
   }
 
   // Busca todos e depois atualiza o dado especifico
   update(produtos: Produtos, key: string){
-    this.db.list('produtos').update(key, produtos)
+    this.db.list<Produtos>('Produtos').update(key, produtos)
     .catch((error: any) => {
       console.log(error);
     });
@@ -41,19 +43,27 @@ export class ProdutosService {
 
   // Cria uma copia da lista de todos, e converte para um novo modelo
   getAll(){
-    return this.db.list('produtos')
+    return this.db.list<Produtos>('Produtos')
     .snapshotChanges()
     .pipe(
-      map((changes: any) =>{
-        return changes.map((c: any) => ({ key: c.payload.key, ...c.payload.val() }));
+      map((changes) =>{
+         return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
       })
     );
   }
 
   // Informa qual objeto deve ser deletado, usando a key
   delete(key: string){
-    this.db.object(`produtos/${key}`).remove();
+    this.db.object(`Produtos/${key}`).remove();
   }
+
+  /*
+  get(){
+      this.db.object(`produtos/${key}`).valueChanges
+  }*/
+
+
+
 
 
 }

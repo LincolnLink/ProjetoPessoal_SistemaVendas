@@ -32,7 +32,15 @@ export class Produtos{
   }
 
 
+  /**
+   *
+   */
+  // constructor(id: string, nome: string, valor: number) {
+  //   this.idProduto = id,
+  //   this.nome = nome,
+  //   this.valorUnitario = valor
 
+  // }
 
 
 
