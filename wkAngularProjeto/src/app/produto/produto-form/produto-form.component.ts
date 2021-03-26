@@ -79,7 +79,20 @@ export class ProdutoFormComponent implements OnInit {
 
   // Volta para a pagina anterior
   onCancel(){
+
+    // Limpa o ultimo produto
+    this.produtos = new Produto();
+    this.formulario.patchValue({
+      idProduto :'',
+      nome: '',
+      valorUnitario:''
+    });
+
+    this.key = '';
+    this.produtos = new Produto();
+
     this.location.back();
+
   }
 
 }

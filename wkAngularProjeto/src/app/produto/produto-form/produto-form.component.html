@@ -1,31 +1,48 @@
-
+<br>
+<br>
+<br>
 <br>
 <mat-card>
   <mat-card-header>
     <mat-card-title>Formulario De Produtos</mat-card-title>
-    <mat-card-subtitle></mat-card-subtitle>
+
   </mat-card-header>
+
 </mat-card>
 
 <br>
 
+<mat-card>
+  <mat-card-content>
 
 
+    <form (ngSubmit)="onSubmit()" [formGroup]="formulario">
+      <div class="row">
 
-<form (ngSubmit)="onSubmit()" [formGroup]="formulario">
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group ">
+            <label>Nome: </label>
+            <input class="form-control" type="text" formControlName="nome" id="nome" name="nome" >
+          </div>
+        </div>
 
-  <div>
-    <label>Nome: </label>
-    <input type="text" formControlName="nome" id="nome" name="nome" >
-  </div>
+        <div class="col-sm-6 col-lg-6">
+          <div class="form-group ">
+            <label>Valor: </label>
+            <input class="form-control" type="number" formControlName="valorUnitario" id="valorUnitario" name="valorUnitario" >
+          </div>
+        </div>
 
-  <div>
-    <label>Valor: </label>
-    <input type="number" formControlName="valorUnitario" id="valorUnitario" name="valorUnitario" >
-  </div>
-<br>
-  <button type="submit">Salvar</button>
-<br><br><br>
-  <a (click)="onCancel()">Cancelar</a>
+        <br>
+        <div class="col-sm-12">
+          <button class="btn-outline-light btn btn-success mr-3" type="submit">Salvar</button>
 
-</form>
+          <button type="button" class="btn btn-secondary" (click)="onCancel()">Volta</button>
+
+        </div>
+
+      </div>
+    </form>
+
+  </mat-card-content>
+</mat-card>

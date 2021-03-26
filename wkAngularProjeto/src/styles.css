@@ -142,3 +142,15 @@ color: rgb(8 198 189 / 98%) !important;
 .mat-cell, .mat-footer-cell {
   font-size: 16px;
 }
+
+
+/*editado - removendo borda do botão*/
+button.mat-icon-button {
+  border: none;
+  height: 24px;
+
+}
+button.mat-icon-button:focus {
+  border: none;
+  outline: none;
+}
