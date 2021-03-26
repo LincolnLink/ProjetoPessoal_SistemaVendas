@@ -1,2 +1,43 @@
-{{ title }}
-<router-outlet></router-outlet>
+
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bgGlobal ">
+
+  <div class="d-flex justify-content-between align-items-center flex-wrap">
+    <button class="navbar-toggler" type="button"
+    (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+    aria-controls="navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand ml-1" href="#">Sistema WK</a>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarNav" [collapse]="isCollapsed" [isAnimated]="true" >
+    <ul class=" mr-auto sidenav navbar-nav bgGlobal" id="navAccordion">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/']" routerLinkActive="active"
+        (click)="isCollapsed = true" >
+          Home
+        </a>
+        <mat-divider ></mat-divider>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/produto']" routerLinkActive="active"
+        (click)="isCollapsed = true">
+        Lista de Produtos
+        </a>
+        <mat-divider ></mat-divider>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class="content-wrapper ">
+
+  <div class="container-fluid ">
+    <router-outlet></router-outlet>
+  </div>
+
+</main>
+

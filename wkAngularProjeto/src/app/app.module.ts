@@ -5,14 +5,36 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { environment } from 'src/environments/environment.prod';
+
+//FireBase
+import { AngularFireModule } from '@angular/fire'
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+//Material
+import { MatListModule} from '@angular/material/list';
+//ngx bootstrap
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { HttpClientModule } from '@angular/common/http';
+
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+
+    AngularFireModule.initializeApp(environment.firebase), //firebase
+    AngularFireDatabaseModule,
+
+    MatListModule, //material
+
+    CollapseModule.forRoot(), //ngx-bootstrap
+
   ],
   providers: [],
   bootstrap: [AppComponent]

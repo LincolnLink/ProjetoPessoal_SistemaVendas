@@ -1,0 +1,168 @@
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  padding-top: 4.5rem;
+  margin-bottom: 4.5rem;
+}
+
+/*refatorando*/
+.nav-link{
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+  padding-left: 1em;
+  position: relative;
+  height: inherit;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.nav-item{
+
+  font-size: 16px;
+  padding: 0;
+  position: relative;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  height: 48px;
+  display: block;
+
+}
+
+.nav-link:hover {
+transition: all 0.4s;
+}
+
+.nav-link-collapse:after {
+float: right;
+content: '\f067';
+font-family: 'FontAwesome';
+}
+
+.nav-link-show:after {
+float: right;
+content: '\f068';
+font-family: 'FontAwesome';
+}
+
+
+
+/*
+.sidenav{
+  /*background: #343a40;
+}*/
+
+/*desktop*/
+@media (min-width: 992px) {
+  .sidenav {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 230px;
+    height: calc(100vh - 3rem);
+    margin-top: 3.5rem;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+  }
+
+  .navbar-expand-lg .sidenav {
+    flex-direction: column;
+  }
+
+  .content-wrapper {
+    margin-left: 230px;
+  }
+
+  .footer {
+    width: calc(100% - 230px);
+    margin-left: 230px;
+  }
+
+  /*Sobre escrevendo bootstrap*/
+  .navbar-expand-lg .navbar-nav .nav-link {
+
+    padding: 0 16px;
+  }
+
+  .margi-container{
+    margin-top: 3.6em !important;
+  }
+}
+
+/*tablet*/
+@media (min-width: 348px) {
+
+  .navbar-expand-lg .sidenav {
+    flex-direction: column;
+  }
+
+
+
+  /*Sobre escrevendo bootstrap*/
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding: 0 16px;
+  }
+
+  .margi-container{
+    margin-top: 3.6em !important;
+  }
+
+
+}
+
+/*Sobre escrevendo classe css do ANGULAR MATERIAL*/
+
+
+/*seta quse erteza*/
+.expansion-indicator::after {
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  content: "";
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg );
+  vertical-align: middle;
+}
+
+.expansion-indicator::after {
+  color: rgba(0,0,0,.54);
+}
+
+
+/*criando*/
+.margi-container{
+  margin-top: 5.9em;
+
+
+  /*teste de fundo*/
+  background: #000000;
+  color: #fff;
+}
+
+.second-level-nav{
+  padding-left: 2.5em !important;
+}
+
+.seta .setaIcone{
+  transition: all 0.5s !important;
+}
+.muda{
+  transform: rotate(180deg) !important;
+}
+.setaIcone{
+  color: #fff !important;
+}
+/*
+i:before {
+  font-family: 'Glyphicons Halflings';
+  content: "\e114";
+  float: right;
+  transition: all 0.5s;
+}*/
+
+
