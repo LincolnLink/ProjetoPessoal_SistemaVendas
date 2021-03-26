@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { BaseValidFormComponent } from './../../shared/component/base-valid-form/base-valid-form.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Produto } from 'src/app/shared/entidades/classes/produtoData';
@@ -10,9 +11,8 @@ import { ProdutoService } from 'src/app/shared/service/produto.service';
   templateUrl: './produto-form.component.html',
   styleUrls: ['./produto-form.component.css']
 })
-export class ProdutoFormComponent implements OnInit {
+export class ProdutoFormComponent extends BaseValidFormComponent implements OnInit {
 
-  formulario: FormGroup = {} as FormGroup;
 
   produtos: Produto = {} as Produto;
   key: string = '';
@@ -23,23 +23,23 @@ export class ProdutoFormComponent implements OnInit {
     private produtoDataService: ProdutoDataService,
     private produtoService: ProdutoService,
     private location: Location
-  ) { }
+  ) {super();}
 
   ngOnInit(): void {
 
+    //Criando o form
     this.formulario = this.formBuilder.group({
-
-      idProduto: [null, [Validators.required]],
+      idProduto: [null],
       nome: ['', [Validators.required]],
-      valorUnitario: [[''], [Validators.required]]
+      valorUnitario: ['', [Validators.required]]
     });
 
+    //Limpando
     this.produtos = new Produto();
 
+    //Recebendo valores novos ou limpo
     this.produtoDataService.currentPordutos.subscribe(data => {
-
       if(data.produtos && data.key){
-
         this.formulario.patchValue({
           idProduto : data.produtos.idProduto,
           nome: data.produtos.nome,
@@ -48,38 +48,46 @@ export class ProdutoFormComponent implements OnInit {
         this.key = data.key;
       }
     });
+
+
   }
 
 
+  //Enviando os dados para o banco
   onSubmit(){
 
-    if(this.key){
 
-      let valueSubmit: Produto = Object.assign({}, this.formulario.value)
+    if(this.formulario.valid){
 
-      // Atualiza os dados
-      this.produtoService.update(valueSubmit, valueSubmit.idProduto);
+      if(this.key){
+        //Convertendo para objeto
+        let valueSubmit: Produto = Object.assign({}, this.formulario.value);
+        // Atualiza os dados
+        this.produtoService.update(valueSubmit, valueSubmit.idProduto);
+        //Volta para pagina anterior
+        this.location.back();
+      }else{
+        // Tratando o objeto, criando uma copia do valor.
+        let valueSubmit = Object.assign({}, this.formulario.value)
+        // Adiciona no banco
+        this.produtoService.insert(valueSubmit);
+        //Volta para pagina anterior
+        this.location.back();
+      }
+      // Limpa o ultimo produto
+      this.produtos = new Produto();
 
-      //Volta para pagina anterior
-      this.location.back();
-    }else{
-
-      // Tratando o objeto, criando uma copia do valor.
-      let valueSubmit = Object.assign({}, this.formulario.value)
-      // Adiciona no banco
-      this.produtoService.insert(valueSubmit);
-
-      //Volta para pagina anterior
-      this.location.back();
+    }
+    else
+    {
+      console.log('form invalido ')
+      this.verificaValidacoesForm(this.formulario);
     }
 
-    // Limpa o ultimo produto
-    this.produtos = new Produto();
   }
 
-  // Volta para a pagina anterior
+  //Volta para a pagina anterior
   onCancel(){
-
     // Limpa o ultimo produto
     this.produtos = new Produto();
     this.formulario.patchValue({
@@ -87,12 +95,9 @@ export class ProdutoFormComponent implements OnInit {
       nome: '',
       valorUnitario:''
     });
-
     this.key = '';
     this.produtos = new Produto();
-
     this.location.back();
-
   }
 
 }

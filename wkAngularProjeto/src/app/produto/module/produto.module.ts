@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 //btn
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -29,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
     ProdutoRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SharedModule,
 
     MatTableModule, //Tabela do Angular Material
     MatPaginatorModule,

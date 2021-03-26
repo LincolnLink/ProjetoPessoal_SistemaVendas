@@ -1,7 +1,7 @@
 
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscriber, Subscription } from 'rxjs';
 import { Produto } from 'src/app/shared/entidades/classes/produtoData';
 import { ProdutoDataService } from 'src/app/shared/service/produto-data.service';
 import { ProdutoService } from 'src/app/shared/service/produto.service';
@@ -15,17 +15,18 @@ import { MatSort } from '@angular/material/sort';
   templateUrl: './produto-list.component.html',
   styleUrls: ['./produto-list.component.css']
 })
-export class ProdutoListComponent implements AfterViewInit, OnInit {
+export class ProdutoListComponent implements AfterViewInit, OnInit, OnDestroy {
 
-  // Propriedade que recebe a lista de produtos
-  listProdutos$: Observable<any> = new Observable<any>();
+  //ListaEdestruir
+  listDestroy : Subscription = new Subscription();
 
-  //tabela
-  displayedColumns: string[] = ['CI do produto', 'Nome', 'Valor Unitario', 'actions'];
-
+  //Lista de produtos
   Produtos: Produto[] = []
-  dataSource = new MatTableDataSource<Produto>();
 
+  //Coluna e valores da tabela
+  displayedColumns: string[] = ['CI do produto', 'Nome', 'Valor Unitario', 'actions'];
+  dataSource = new MatTableDataSource<Produto>();
+  //Paginação
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -38,37 +39,34 @@ export class ProdutoListComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
 
-     //Alimenta com os valores a lista de produtos
-     //this.listProdutos$ = this.produtoService.getAll();
-
-
-
   }
 
+  //Depois que carrega o DOM carrega os dados
   ngAfterViewInit() {
-
-    let x = this.produtoService.getAll2()
+    this.listDestroy = this.produtoService.getAll2()
     .subscribe(i =>{
       this.Produtos =i
-      this.dataSource = new MatTableDataSource<Produto>(this.Produtos);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
+      this.alimentandoTabela(this.Produtos)
+      }
+    );
+  }
 
-    }
-   );
+  // Se desinscrevendo
+  ngOnDestroy(): void {
+    this.listDestroy.unsubscribe();
+  }
 
-
-
-
+  //Pegando valores da tabela
+  alimentandoTabela(list : Produto[]){
+    this.dataSource = new MatTableDataSource<Produto>(list);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
    // Deleta o item
   excluir(key: string){
     this.produtoService.delete(key);
-
-    this.dataSource = new MatTableDataSource<Produto>(this.Produtos);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.alimentandoTabela(this.Produtos);
   }
 
   //informa os dados que vão ser editados
@@ -77,17 +75,14 @@ export class ProdutoListComponent implements AfterViewInit, OnInit {
     // Com o router você nevega para a pagina de edição!
     this.contatoDataService.changeContato(produto, key);
     this.router.navigate(['editar'], {relativeTo: this.route});
-
-
   }
 
-  //informa os dados que vão ser editados
+  //Preparando forma para novos dados
   novo(produto: Produto = {} as Produto, key: string = ''){
 
     // Com o router você nevega para a pagina de edição!
     this.contatoDataService.changeContato(produto, key);
     this.router.navigate(['novo'], {relativeTo: this.route});
-
   }
 
 

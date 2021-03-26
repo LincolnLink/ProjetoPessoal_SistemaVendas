@@ -154,3 +154,12 @@ button.mat-icon-button:focus {
   border: none;
   outline: none;
 }
+
+
+/*Alerta de erro*/
+
+.alert-danger {
+  color: #f1d7da;
+  background-color: #1b0103;
+  border-color: #050102;
+}

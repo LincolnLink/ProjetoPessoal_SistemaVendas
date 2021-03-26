@@ -23,6 +23,7 @@
           <div class="form-group ">
             <label>Nome: </label>
             <input class="form-control" type="text" formControlName="nome" id="nome" name="nome" >
+            <msn-valid cssErro="danger" [condicao]="isInValidTouched('nome')" msnErro="Nome" ></msn-valid>
           </div>
         </div>
 
@@ -30,12 +31,15 @@
           <div class="form-group ">
             <label>Valor: </label>
             <input class="form-control" type="number" formControlName="valorUnitario" id="valorUnitario" name="valorUnitario" >
+            <msn-valid cssErro="danger" [condicao]="isInValidTouched('valorUnitario')" msnErro="Valor do produto" ></msn-valid>
           </div>
         </div>
 
         <br>
         <div class="col-sm-12">
-          <button class="btn-outline-light btn btn-success mr-3" type="submit">Salvar</button>
+          <button class="btn-outline-light btn btn-success mr-3"
+          type="submit"
+          >Salvar</button>
 
           <button type="button" class="btn btn-secondary" (click)="onCancel()">Volta</button>
 
