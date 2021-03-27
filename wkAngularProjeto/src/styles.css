@@ -18,6 +18,36 @@ body{
   margin-left: 0 !important;
 }
 
+/*acordion*/
+/*
+.accordion-toggle:focus, .btn-link:focus{
+  outline: none !important;
+  border: none !important;
+}
+
+ .btn-link, .card-header, .card-body{
+  background: #191b25 !important;
+  /*color: #676a8e !important;
+  color: #fff;
+  fill: #fff;
+  text-decoration: none;
+
+}
+
+.btn-link:hover{
+  text-decoration: none;
+  color: #fff;
+  fill: #fff;
+}
+
+.btn-link{
+  width: 100%;
+  height: 140px;
+  display: flex;
+}
+*/
+
+
 /*Novo template   */
 .bgGlobal{
   background: #191b25 !important;
@@ -27,7 +57,7 @@ body{
 }
 
   /*borda card */
-  .card-borde{
+.card-borde{
   border-radius: 4px;
 }
 
@@ -162,4 +192,32 @@ button.mat-icon-button:focus {
   color: #f1d7da;
   background-color: #1b0103;
   border-color: #050102;
+}
+
+
+.mat-flat-button.mat-warn, .mat-raised-button.mat-warn, .mat-fab.mat-warn, .mat-mini-fab.mat-warn {
+  background-color: #af3740;
+}
+
+
+/*mobile*/
+@media (min-width: 425px) {
+/*
+  .btn-link{
+    display: block;
+    height: 100px;
+  }*/
+
+  /* .accordion-toggle{
+
+  } */
+}
+
+
+.labelForm{
+  font-size: 20px;
+  font-weight: 500;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: rgb(8 198 189 / 98%) !important;
+  padding-right: 1em;
 }

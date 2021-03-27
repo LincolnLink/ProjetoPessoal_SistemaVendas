@@ -14,7 +14,7 @@
   <div class="collapse navbar-collapse" id="navbarNav" [collapse]="isCollapsed" [isAnimated]="true" >
     <ul class=" mr-auto sidenav navbar-nav bgGlobal" id="navAccordion">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/']" routerLinkActive="active"
+        <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active"
         (click)="isCollapsed = true" >
           Home
         </a>
@@ -24,6 +24,13 @@
         <a class="nav-link" [routerLink]="['/produto']" routerLinkActive="active"
         (click)="isCollapsed = true">
         Lista de Produtos
+        </a>
+        <mat-divider ></mat-divider>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/cliente']" routerLinkActive="active"
+        (click)="isCollapsed = true">
+        Lista de Clientes
         </a>
         <mat-divider ></mat-divider>
       </li>

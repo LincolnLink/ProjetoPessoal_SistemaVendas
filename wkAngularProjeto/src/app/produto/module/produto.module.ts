@@ -28,16 +28,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     ProdutoRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
     SharedModule,
 
-    MatTableModule, //Tabela do Angular Material
-    MatPaginatorModule,
-    MatSortModule,
-    MatSelectModule,
-    MatCardModule, //card
-    MatButtonModule //btn
+
   ]
 })
 export class ProdutoModule { }

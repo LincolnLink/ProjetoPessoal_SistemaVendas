@@ -1,0 +1,70 @@
+<br><br><br><br>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Home</mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
+
+
+<br>
+<div class="d-flex flex-wrap ">
+
+      <div class="col-sm-12 col-md-12 col-lg-12 mb-4 bgGlobal card-borde">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Graficos Barra Horizontal</mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+
+            <div class="grafico-config" #resizedDiv>
+              <ngx-charts-bar-horizontal
+                [scheme]="colorSchemeBarHor"
+                [results]="single"
+                [gradient]="gradient"
+                [xAxis]="showXAxis"
+                [yAxis]="showYAxis"
+                [legend]="showLegend"
+                [showXAxisLabel]="showXAxisLabelBarhor"
+                [showYAxisLabel]="showYAxisLabelBarhor"
+                [xAxisLabel]="xAxisLabelBarhor"
+                [yAxisLabel]="yAxisLabelBarhor"
+                (select)="onSelect($event)"
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)">
+              </ngx-charts-bar-horizontal>
+            </div>
+
+          </mat-card-content>
+        </mat-card>
+
+
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6 mb-4 bgGlobal card-borde">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Grafico em Pizza</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+
+              <div class="grafico-config" #resizedDiv>
+                <ngx-charts-pie-chart
+                [scheme]="colorScheme"
+                [results]="pizza"
+                [gradient]="gradientPizza"
+                [legend]="showLegendPizza"
+                [legendPosition]="legendPosition"
+                [labels]="showLabels"
+                [doughnut]="isDoughnut"
+                (select)="onSelect($event)"
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)">
+                </ngx-charts-pie-chart>
+              </div>
+
+          </mat-card-content>
+        </mat-card>
+      </div>
+</div>
