@@ -1,0 +1,37 @@
+<br>
+<br>
+<br>
+
+
+
+<!--Carrinho-->
+<carrinho></carrinho>
+
+<!--Produto-->
+
+<mat-card class="mb-3">
+  <mat-card-header>
+    <mat-card-title>Produtos</mat-card-title>
+
+  </mat-card-header>
+
+</mat-card>
+
+<div class="row mb-3">
+  <div *ngFor="let pro of Produtos | async" class="col-12 col-sm-6 col-lg-4">
+    <div  class="bgGlobal p-3 card-borde mb-3">
+      <div class="h6">
+        <label class="labelForm" >Id: </label>{{ pro.idProduto }}
+
+      </div>
+      <div class="h6">
+        <label class="labelForm">Nome: </label>{{ pro.nome }}
+      </div>
+
+      <div class="h6">
+        <label class="labelForm">Valor: </label>{{ pro.valorUnitario }}
+      </div>
+      <button mat-raised-button color="primary" class="mr-3" (click)="addProduto(pro)">Add Item</button>
+    </div>
+  </div>
+</div>

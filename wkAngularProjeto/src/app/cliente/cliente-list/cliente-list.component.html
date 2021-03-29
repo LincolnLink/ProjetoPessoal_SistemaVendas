@@ -10,7 +10,7 @@
 <br>
 
 
-<div *ngFor="let item of Cliente" class="bgGlobal p-3 card-borde mb-3">
+<div *ngFor="let item of Cliente | async" class="bgGlobal p-3 card-borde mb-3">
 
 
     <div class="row mb-3">
@@ -24,7 +24,7 @@
         <label class="labelForm">E-mail: </label>{{ item.email }}
       </div>
       <div class="col-12 col-sm-3 col-lg-3 m-3 h6">
-        <label class="labelForm">Data de Nascimento: </label>{{ item.dataNascimento }}
+        <label class="labelForm">Data de Nascimento: </label>{{ item.dataNascimento | date:'dd-MM-yyyy'}}
       </div>
     </div>
 

@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Cliente } from 'src/app/shared/entidades/classes/clienteData';
+import { Pedido } from './../entidades/classes/pedidoVendaData';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClienteDataService {
+export class PedidoDataService {
 
   // Propriedade que emite valores sendo inicializada
   // BehaviorSubject: Mantem o estado e tem sempre o ultimo valor,
   // ele sempre a tualiza o ultimo valor que foi emitido.
-  private clienteSource = new BehaviorSubject({ cliente: {} as Cliente, key: ''});
+  private pedidoSource = new BehaviorSubject({ pedido: {} as Pedido, key: ''});
 
   //Recebe a emição dos dados!
-  currentCliente = this.clienteSource.asObservable();
+  currentPedido = this.pedidoSource.asObservable();
 
   constructor() { }
 
   // Recebe o valor do objeto e da key, que vai ser editado!
   // Depois emite os dados(next).
-  changeContato(cliente: Cliente, key: string){
-    this.clienteSource.next({ cliente: cliente, key: key });
+  changeContato(pedido: Pedido, key: string){
+    this.pedidoSource.next({ pedido: pedido, key: key });
   }
 }

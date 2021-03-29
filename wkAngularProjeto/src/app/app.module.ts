@@ -15,13 +15,12 @@ import { MatListModule} from '@angular/material/list';
 //ngx bootstrap
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './home/home.component';
+import { CarrinhoComponent } from './pedido-venda/carrinho/carrinho.component';
+import { CheckoutComponent } from './pedido-venda/checkout/checkout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-
-
 
   ],
   imports: [

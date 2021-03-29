@@ -1,0 +1,49 @@
+<br>
+<mat-card class="mt-2">
+  <mat-card-header class="align-self-center d-flex justify-content-between">
+    <mat-card-title>Lista De Pedidos</mat-card-title>
+    <button type="button" class="btn btn-primary" (click)="novo()" >Novo</button>
+
+  </mat-card-header>
+</mat-card>
+
+<br>
+
+
+<div *ngFor="let item of Pedido | async" class="bgGlobal p-3 card-borde mb-3">
+
+  <div class="row mb-3">
+
+    <div class="col-12 col-sm-5 col-lg-5 m-3 h6">
+      <div class="col-12 col-sm-12 col-lg-12">
+        <label class="labelForm">Código de identificação da venda: </label>
+        {{ item.idVenda }}
+      </div>
+      <div class="col-12 col-sm-12 col-lg-12">
+        <label class="labelForm">Data e Hora da venda: </label>{{ item.dataHora }}
+        <p class="col-12">{{ item.dataHora }}</p>
+      </div>
+      <div class="col-12 col-sm-12 col-lg-12">
+        <label class="labelForm">Identificação do cliente: </label>{{ item.cliente }}
+        <label class="labelForm">Nome cliente: </label> ---
+      </div>
+      <div class="col-12 col-sm-12 col-lg-12">
+        <label class="labelForm">Total da venda: </label>{{ item.totalVenda }}
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <div class="row  mb-3">
+
+    <div class="col-12 m-3">
+
+
+      <button mat-raised-button color="warn" (click)="excluir(item.idVenda)">Delete</button>
+
+    </div>
+  </div>
+
+</div>

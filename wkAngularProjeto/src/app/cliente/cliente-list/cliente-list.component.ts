@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { Cliente } from 'src/app/shared/entidades/classes/clienteData';
 import { ClienteService } from 'src/app/shared/service/cliente.service';
 import { ClienteDataService } from './../../shared/service/cliente-data.service';
@@ -15,14 +15,12 @@ import { ClienteDataService } from './../../shared/service/cliente-data.service'
   templateUrl: './cliente-list.component.html',
   styleUrls: ['./cliente-list.component.css']
 })
-export class ClienteListComponent implements AfterViewInit, OnInit, OnDestroy {
+export class ClienteListComponent implements AfterViewInit, OnInit {
 
 
-  //ListaEdestruir
-  listDestroy : Subscription = new Subscription();
 
   //Lista de produtos
-  Cliente: Cliente[] = []
+  Cliente!: Observable<Cliente[]>;
 
 
   constructor(
@@ -38,20 +36,13 @@ export class ClienteListComponent implements AfterViewInit, OnInit, OnDestroy {
   //Depois que carrega o DOM carrega os dados
   ngAfterViewInit() {
 
-    this.listDestroy = this.clienteService.getAll2()
-    .subscribe((i: any) =>{
-      this.Cliente = i  ; console.log("res: ", i)
-      }
-    );
+    this.Cliente = this.clienteService.getAll2()
+    // .subscribe((i: any) =>{ = i;});
   }
 
-  // Se desinscrevendo
-  ngOnDestroy(): void {
-    this.listDestroy.unsubscribe();
-  }
 
-   // Deleta o item
-   excluir(key: string){
+  // Deleta o item
+  excluir(key: string){
     this.clienteService.delete(key);
   }
 
@@ -64,10 +55,10 @@ export class ClienteListComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   //Preparando forma para novos dados
-  novo(produto: Cliente = {} as Cliente, key: string = ''){
+  novo(cliente: Cliente = {} as Cliente, key: string = ''){
 
     // Com o router você nevega para a pagina de edição!
-    this.contatoDataService.changeContato(produto, key);
+    this.contatoDataService.changeContato(cliente, key);
     this.router.navigate(['novo'], {relativeTo: this.route});
   }
 
