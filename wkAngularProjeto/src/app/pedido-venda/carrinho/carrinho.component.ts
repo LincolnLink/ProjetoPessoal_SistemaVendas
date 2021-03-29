@@ -79,7 +79,7 @@ export class CarrinhoComponent extends BaseValidFormComponent implements OnInit 
       // Total da venda
       this.myOrderItems$.subscribe(i =>
 
-          i.forEach(j => this.pedido.totalVenda = this.pedido.totalVenda + (j.product.valorUnitario * j.quantidade))
+          i.forEach(j => this.pedido.totalVenda = this.pedido.totalVenda + (j.valorProduto * j.quantidade))
       );
 
 

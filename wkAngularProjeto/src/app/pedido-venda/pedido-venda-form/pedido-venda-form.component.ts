@@ -93,11 +93,14 @@ export class PedidoVendaFormComponent implements OnInit {
   addProduto(pro: Produto ){
 
     // Pega produto
-    let product1: Produto = pro
-    // Cria o objeto com o produto e a quantidade
-    let orderItem: itensCarrinho = { product: product1, quantidade:1};
+    let product: itensCarrinho = {} as itensCarrinho;
+    product.nomeProduto = pro.nome;
+    product.valorProduto = pro.valorUnitario;
+    product.idProduto = pro.idProduto;
+    product.quantidade = 1;
+
     //Envia para o banco
-    this.carrinhoService.addItem(orderItem)
+    this.carrinhoService.addItem(product)
   }
 
 }

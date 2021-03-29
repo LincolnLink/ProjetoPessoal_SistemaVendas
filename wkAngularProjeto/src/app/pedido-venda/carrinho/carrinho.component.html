@@ -27,11 +27,11 @@
         <div *ngFor="let item of myOrderItems$ | async" class="d-sm-flex align-items-center justify-content-between mb-3">
 
               <div class="h6 d-flex align-items-center">
-                <label class="labelForm m-0">Nome:</label>{{item.product.nome}}
+                <label class="labelForm m-0">Nome:</label>{{item.nomeProduto}}
 
               </div>
               <div class="h6 d-flex align-items-center">
-                <label class="labelForm m-0">Valor: </label> {{item.product.valorUnitario | currency}}
+                <label class="labelForm m-0">Valor: </label> {{item.valorProduto| currency}}
               </div>
 
               <div class="h6 d-flex align-items-center">
@@ -41,7 +41,7 @@
               <div class="h6 d-flex align-items-center justify-content-between">
                 <div>
                   <label class="labelForm m-0">Total: </label>
-                  <div>{{item.quantidade * item.product.valorUnitario  | currency }}</div>
+                  <div>{{item.quantidade * item.valorProduto| currency }}</div>
                 </div>
                <div>
                 <button mat-raised-button color="warn" class=" ml-auto" (click)="Remover(item)">Remover</button>

@@ -26,7 +26,7 @@ export class CarrinhoService {
   addItem(orderItem: itensCarrinho) {
     const orderItems = this.subject.getValue();
 
-    const productIndex = orderItems.findIndex(item => item.product.idProduto === orderItem.product.idProduto);
+    const productIndex = orderItems.findIndex(item => item.idProduto === orderItem.idProduto);
 
     if(productIndex >= 0){
 
@@ -50,7 +50,7 @@ export class CarrinhoService {
   removeItem(orderItem: itensCarrinho) {
     let orderItems = this.subject.getValue();
 
-    const productIndex = orderItems.findIndex(item => item.product.idProduto === orderItem.product.idProduto);
+    const productIndex = orderItems.findIndex(item => item.idProduto === orderItem.idProduto);
 
     if(productIndex >= 0){
 
@@ -58,7 +58,7 @@ export class CarrinhoService {
 
       updatedOrderItem.quantidade -=1;
 
-      orderItems = orderItems.filter(i => i.product.idProduto !== orderItem.product.idProduto);
+      orderItems = orderItems.filter(i => i.idProduto !== orderItem.idProduto);
 
       const newOrderItems = orderItems.slice(0);
 

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
-import { Pedido } from '../entidades/classes/pedidoVendaData';
+import { itensCarrinho, Pedido } from '../entidades/classes/pedidoVendaData';
 import { Produto } from '../entidades/classes/produtoData';
 
 @Injectable({
@@ -58,21 +58,13 @@ export class PedidoVendaService {
   return this.db.list<Pedido>('PedidoVenda').snapshotChanges()
   .pipe(
     map((changes) =>{
-       return changes.map((c, index: number) => (
+       return changes.map((c, i) => (
         {
           idVenda: c.payload.val()?.idVenda,
           cliente: c.payload.val()?.cliente,
           dataHora: c.payload.val()?.dataHora,
           totalVenda: c.payload.val()?.totalVenda,
-          listProdutos: [{
-            quantidade: c.payload.val()?.listProdutos[index].quantidade,
-            product:
-            {
-              idProduto: c.payload.val()?.listProdutos[index].product.idProduto,
-              nome: c.payload.val()?.listProdutos[index].product.nome,
-              valorUnitario: c.payload.val()?.listProdutos[index].product.valorUnitario
-            } as Produto,
-          }]
+          listProdutos: c.payload.val()?.listProdutos
         } as Pedido
       ));
     })

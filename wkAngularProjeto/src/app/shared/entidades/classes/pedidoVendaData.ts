@@ -59,8 +59,10 @@ export class Pedido{
 
 
 export interface itensCarrinho {
-  product: Produto;
+  nomeProduto: string;
   quantidade: number;
+  valorProduto: number;
+  idProduto: string
 }
 
 
