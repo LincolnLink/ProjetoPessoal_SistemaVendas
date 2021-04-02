@@ -1,19 +1,23 @@
+import { map, catchError } from 'rxjs/operators';
 import { PedidoDataService } from './../../shared/service/pedido-data.service';
 import { Pedido } from './../../shared/entidades/classes/pedidoVendaData';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, Subscriber, forkJoin } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PedidoVendaService } from 'src/app/shared/service/pedido-venda.service';
+import { pluck } from 'rxjs/operators';
 
 @Component({
   selector: 'pedido-venda-list',
   templateUrl: './pedido-venda-list.component.html',
 
 })
-export class PedidoVendaListComponent implements OnInit {
+export class PedidoVendaListComponent implements OnInit, AfterViewInit {
 
 
-    Pedido!: Observable<Pedido[]>;
+    Pedido0$!: Observable<any>;
+    Pedido1!: Observable<Pedido[]>;
+
 
     constructor(
     private pedidoDataServico: PedidoDataService,
@@ -22,15 +26,14 @@ export class PedidoVendaListComponent implements OnInit {
     private route: ActivatedRoute,) { }
 
 
+    ngAfterViewInit(): void {
+
+    }
+
     ngOnInit(): void {
-      let x ;
-      this.pedidoService.getAll3().subscribe(i => x = i);
-      this.Pedido = this.pedidoService.getAll2();
 
+       this.Pedido1 = this.pedidoService.getAll2()
 
-      //this.Pedido.subscribe( i => x = i.forEach( j => j.cliente));
-      console.log("pedido: ", this.Pedido);
-      console.log("x3: ", x);
     }
 
     // Deleta o item

@@ -8,6 +8,16 @@ body{
   border: none;
 }
 
+.card-responsivo-creat{
+    width: 100%;
+    overflow-x: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
 .card-header{
   background-color: rgba(255,255,255,.5) !important;
   border: none;

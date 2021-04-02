@@ -9,46 +9,51 @@
 
 <br>
 
+<div class="card-responsivo-creat">
 
-    <table mat-table matSort [dataSource]="dataSource" class="full-width-table" >
+  <table mat-table matSort [dataSource]="dataSource" class="full-width-table" >
 
-      <!-- Position Column -->
-      <ng-container matColumnDef="CI do produto">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> CI do produto </th>
-        <td mat-cell *matCellDef="let element"> {{element.idProduto}} </td>
-      </ng-container>
+    <!-- Position Column -->
+    <ng-container matColumnDef="CI do produto">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> CI do produto </th>
+      <td mat-cell *matCellDef="let element"> {{element.idProduto}} </td>
+    </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="Nome">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
-        <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
-      </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="Nome">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+      <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+    </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="Valor Unitario">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor Unitário </th>
-        <td mat-cell *matCellDef="let element"> {{element.valorUnitario}} </td>
-      </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Valor Unitario">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor Unitário </th>
+      <td mat-cell *matCellDef="let element"> {{element.valorUnitario}} </td>
+    </ng-container>
 
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef > Actions </th>
-        <td mat-cell *matCellDef="let element" >
-            <button mat-raised-button color="primary" class="mr-3" (click)="edit(element, element.idProduto)">Editar</button>
-            <button mat-raised-button color="warn" (click)="excluir(element.idProduto)">Delete</button>
-        </td>
-      </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef > Actions </th>
+      <td mat-cell *matCellDef="let element" >
+          <button mat-raised-button color="primary" class="mr-3" (click)="edit(element, element.idProduto)">Editar</button>
+          <button mat-raised-button color="warn" (click)="excluir(element.idProduto)">Delete</button>
+      </td>
+    </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 
-    </table>
-    <mat-paginator #paginator
-      [length]="5"
-      [pageIndex]="0"
-      [pageSize]="5"
-      [pageSizeOptions]="[3, 5, 10, 20]" showFirstLastButtons>
-    </mat-paginator>
+  </table>
+  <mat-paginator #paginator
+    [length]="5"
+    [pageIndex]="0"
+    [pageSize]="5"
+    [pageSizeOptions]="[3, 5, 10, 20]" showFirstLastButtons>
+  </mat-paginator>
+
+</div>
+
+
 
 
 

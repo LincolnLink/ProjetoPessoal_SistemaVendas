@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { map } from 'rxjs/operators';
+import { map, pluck } from 'rxjs/operators';
 import { itensCarrinho, Pedido } from '../entidades/classes/pedidoVendaData';
 import { Produto } from '../entidades/classes/produtoData';
+import { ajax } from 'rxjs/ajax';
 
 @Injectable({
   providedIn: 'root'
@@ -53,26 +54,41 @@ export class PedidoVendaService {
 
 
  // Cria uma copia da lista de todos, e converte para um novo modelo
-
  getAll2(){
-  return this.db.list<Pedido>('PedidoVenda').snapshotChanges()
+  return this.db.list<Pedido>('PedidoVenda')
+  .snapshotChanges()
   .pipe(
-    map((changes) =>{
-       return changes.map((c, i) => (
-        {
-          idVenda: c.payload.val()?.idVenda,
-          cliente: c.payload.val()?.cliente,
-          dataHora: c.payload.val()?.dataHora,
-          totalVenda: c.payload.val()?.totalVenda,
-          listProdutos: c.payload.val()?.listProdutos
-        } as Pedido
-      ));
-    })
+    map((changes) =>
+    {
+        console.log("oq tem aki: ", changes);
+
+        return changes.map((c, i) =>
+       {
+          return {
+            idVenda: c.payload.val()?.idVenda,
+            cliente: c.payload.val()?.cliente,
+            dataHora: c.payload.val()?.dataHora,
+            totalVenda: c.payload.val()?.totalVenda,
+            listProdutos: c.payload.val()?.listProdutos
+          } as Pedido
+
+          // let user = c.payload.toJSON();
+          // console.log('teste valor: ', user);
+          // return user
+
+
+
+        });
+    }
   )
+ )
+
  }
 
  getAll3(){
-   return this.http.get<Pedido>("https://wkprojeto-default-rtdb.firebaseio.com/PedidoVenda.json")
+   //return this.http.get<Pedido>("https://wkprojeto-default-rtdb.firebaseio.com/PedidoVenda.json")
+
+   return ajax('https://wkprojeto-default-rtdb.firebaseio.com/PedidoVenda.json');
 
  }
 

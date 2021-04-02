@@ -16,25 +16,31 @@
             <mat-card-title>Graficos Barra Horizontal</mat-card-title>
           </mat-card-header>
 
-          <mat-card-content>
+          <mat-card-content class="card-responsivo-creat">
 
-            <div class="grafico-config" #resizedDiv>
-              <ngx-charts-bar-horizontal
-                [scheme]="colorSchemeBarHor"
-                [results]="single"
-                [gradient]="gradient"
-                [xAxis]="showXAxis"
-                [yAxis]="showYAxis"
-                [legend]="showLegend"
-                [showXAxisLabel]="showXAxisLabelBarhor"
-                [showYAxisLabel]="showYAxisLabelBarhor"
-                [xAxisLabel]="xAxisLabelBarhor"
-                [yAxisLabel]="yAxisLabelBarhor"
-                (select)="onSelect($event)"
-                (activate)="onActivate($event)"
-                (deactivate)="onDeactivate($event)">
-              </ngx-charts-bar-horizontal>
-            </div>
+
+
+              <div class="grafico-config" #resizedDiv>
+                <ngx-charts-bar-horizontal
+                  [scheme]="colorSchemeBarHor"
+                  [results]="single"
+                  [gradient]="gradient"
+                  [xAxis]="showXAxis"
+                  [yAxis]="showYAxis"
+                  [legend]="showLegend"
+                  [showXAxisLabel]="showXAxisLabelBarhor"
+                  [showYAxisLabel]="showYAxisLabelBarhor"
+                  [xAxisLabel]="xAxisLabelBarhor"
+                  [yAxisLabel]="yAxisLabelBarhor"
+                  (select)="onSelect($event)"
+                  (activate)="onActivate($event)"
+                  (deactivate)="onDeactivate($event)">
+                </ngx-charts-bar-horizontal>
+              </div>
+
+
+
+
 
           </mat-card-content>
         </mat-card>
@@ -47,7 +53,9 @@
           <mat-card-header>
             <mat-card-title>Grafico em Pizza</mat-card-title>
           </mat-card-header>
-          <mat-card-content>
+          <mat-card-content class="card-responsivo-creat">
+
+
 
               <div class="grafico-config" #resizedDiv>
                 <ngx-charts-pie-chart
@@ -63,6 +71,10 @@
                 (deactivate)="onDeactivate($event)">
                 </ngx-charts-pie-chart>
               </div>
+
+
+
+
 
           </mat-card-content>
         </mat-card>
