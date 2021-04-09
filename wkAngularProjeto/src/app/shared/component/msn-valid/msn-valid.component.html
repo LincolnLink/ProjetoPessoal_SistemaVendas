@@ -1,4 +1,16 @@
+
+<!--
 <alert [type]="cssErro" [dismissible]="dismissible" *ngIf="condicao">
   <strong>{{msnErro}} não pode ficar em vazio!</strong>
   {{msnErro2}}
 </alert>
+-->
+
+
+<div *ngIf="errorMessage != null" >
+
+  <alert [type]="cssErro" [dismissible]="dismissible" >
+    <strong>{{ errorMessage }}</strong>
+  </alert>
+
+</div>

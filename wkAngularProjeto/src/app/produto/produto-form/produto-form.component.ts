@@ -30,8 +30,8 @@ export class ProdutoFormComponent extends BaseValidFormComponent implements OnIn
     //Criando o form
     this.formulario = this.formBuilder.group({
       idProduto: [null],
-      nome: ['', [Validators.required]],
-      valorUnitario: ['', [Validators.required]]
+      nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+      valorUnitario: ['', [Validators.required, Validators.maxLength(7)]]
     });
 
     //Limpando
@@ -48,6 +48,12 @@ export class ProdutoFormComponent extends BaseValidFormComponent implements OnIn
         this.key = data.key;
       }
     });
+
+    this.formulario.get('nome')?.valueChanges
+    .subscribe(i => {
+
+      console.log('valor teste: ', i);
+    })
 
 
   }

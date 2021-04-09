@@ -3,6 +3,14 @@
   <mat-card-header>
     <mat-card-title>Home (TODO)</mat-card-title>
     <mat-card-subtitle></mat-card-subtitle>
+    <mat-card-content>
+      <div class="d-flex">
+        <ul>
+          <li><a routerLink="#work">Barra</a></li>
+          <li><a routerLink="#contact" >Pizza</a></li>
+        </ul>
+      </div>
+    </mat-card-content>
   </mat-card-header>
 </mat-card>
 
@@ -10,7 +18,7 @@
 <br>
 <div class="d-flex flex-wrap ">
 
-      <div class="col-sm-12 col-md-12 col-lg-12 mb-4 bgGlobal card-borde">
+      <div id="work" class="col-sm-12 col-md-12 col-lg-12 mb-4 bgGlobal card-borde">
         <mat-card>
           <mat-card-header>
             <mat-card-title>Graficos Barra Horizontal</mat-card-title>
@@ -48,7 +56,7 @@
 
       </div>
 
-      <div class="col-sm-12 col-md-6 col-lg-6 mb-4 bgGlobal card-borde">
+      <div id="contact" class="col-sm-12 col-md-6 col-lg-6 mb-4 bgGlobal card-borde">
         <mat-card>
           <mat-card-header>
             <mat-card-title>Grafico em Pizza</mat-card-title>

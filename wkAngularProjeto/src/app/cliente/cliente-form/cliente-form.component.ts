@@ -47,13 +47,13 @@ export class ClienteFormComponent extends BaseValidFormComponent implements OnIn
     this.formulario = this.formBuilder.group({
 
       idCliente: [''],
-      nome: ['', [Validators.required]],
-      cpf: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
+      cpf: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
+      email: ['', [Validators.required, Validators.email]],
       dataNascimento: ['', [Validators.required]],
 
       endereco: this.formBuilder.group({
-        cep: ['', [Validators.required]],
+        cep: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
         numero: ['', Validators.required],
         complemento: [''],
         rua: ['', Validators.required],

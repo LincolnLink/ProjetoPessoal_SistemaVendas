@@ -10,64 +10,65 @@
 <br>
 
 
-<div *ngFor="let item of Cliente | async" class="bgGlobal p-3 card-borde mb-3">
+<div *ngFor="let item of Cliente | async" class="bgGlobal card-borde mb-3 overflow-hidden" style="word-break: break-all;">
 
 
-    <div class="row mb-3">
-      <div class="col-12 col-sm-3 col-lg-3 m-3 h6">
+    <div class="d-flex flex-wrap mb-3">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3 mt-3 h6">
         <label class="labelForm">Nome: </label>{{ item.nome }}
       </div>
-      <div class="col-12 col-sm-3 col-lg-3 m-3 h6">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3 mt-3 h6">
         <label class="labelForm" >CPF: </label>{{ item.cpf }}
       </div>
-      <div class="col-12 col-sm-3 col-lg-3 m-3 h6">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3 mt-3 h6">
         <label class="labelForm">E-mail: </label>{{ item.email }}
       </div>
-      <div class="col-12 col-sm-3 col-lg-3 m-3 h6">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3 mt-3 h6 overflow-hidden">
         <label class="labelForm">Data de Nascimento: </label>{{ item.dataNascimento | date:'dd-MM-yyyy'}}
+
       </div>
     </div>
 
 
-    <div class="row">
-      <div class="col-12 col-sm-12 col-lg-12 m-3">
+    <div class="d-flex flex-wrap">
+
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-3 mt-3">
         <label class="labelForm">Rua: </label> {{ item.endereco.rua }}
       </div>
-      <div class="col-12 col-sm-3 col-lg-2 m-3">
-        <label class="labelForm">Cep: </label> {{ item.endereco.cep }}
-      </div>
-      <div class="col-12 col-sm-6 col-lg-3 m-3">
-        <label class="labelForm">Complemento: </label>{{ item.endereco.complemento }}
-      </div>
-      <div class="col-12 col-sm-3 col-lg-2 m-3">
+
+
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3 mt-3">
         <label class="labelForm">Numero: </label>{{ item.endereco.numero }}
       </div>
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3 mt-3">
+        <label class="labelForm">Complemento: </label>{{ item.endereco.complemento }}
+      </div>
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3 mt-3">
+        <label class="labelForm">Cep: </label> {{ item.endereco.cep }}
+      </div>
 
 
-      <div class="col-12 col-sm-4 col-lg-4 m-3">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3 mt-3">
         <label class="labelForm">Bairro: </label>{{ item.endereco.bairro }}
       </div>
-
-      <div class="col-12 col-sm-2 col-lg-2 m-3">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3 mt-3">
         <label class="labelForm">Estado: </label>{{ item.endereco.estado }}
       </div>
-
-
-
-      <div class="col-12 col-sm-4 col-lg-4 m-3">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3 mt-3">
         <label class="labelForm">Cidade: </label>{{ item.endereco.cidade }}
       </div>
+
     </div>
 
-    <div class="row">
-
-      <div class="col-12 m-3">
-
+    <div class="col-12 mb-3 mt-3 d-flex flex-wrap justify-content-between">
+      <div>
         <button mat-raised-button color="primary" class="mr-3" (click)="edit(item, item.idCliente)">Editar</button>
+      </div>
+      <div>
         <button mat-raised-button color="warn" (click)="excluir(item.idCliente)">Delete</button>
-
       </div>
     </div>
+
 </div>
 
 
