@@ -16,6 +16,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { AlertModalComponent } from './component/alert-modal/alert-modal.component';
+
 
 const MATERIAL_MODULES = [
   MatTableModule, //Tabela do Angular Material
@@ -35,13 +37,16 @@ const MATERIAL_MODULES = [
 
 @NgModule({
   declarations: [
-    MsnValidComponent
+    MsnValidComponent,
+    AlertModalComponent
   ],
   exports:[
     ReactiveFormsModule,
     HttpClientModule,
     MsnValidComponent,
-    MATERIAL_MODULES
+    MATERIAL_MODULES,
+    AlertModalComponent
+
 
   ],
   imports: [
@@ -50,6 +55,7 @@ const MATERIAL_MODULES = [
     HttpClientModule,
     MATERIAL_MODULES,
     AlertModule.forRoot(),
+
 
   ]
 })

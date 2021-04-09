@@ -16,7 +16,14 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
+//Mascara de cpf/cnpj
+import { NgxMaskModule, IConfig } from 'ngx-mask'
 
+
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 
 @NgModule({
@@ -29,7 +36,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     ProdutoRoutingModule,
     SharedModule,
-
+    NgxMaskModule.forRoot(maskConfig),
 
   ]
 })

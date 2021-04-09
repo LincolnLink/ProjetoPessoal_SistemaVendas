@@ -8,6 +8,14 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { MatListModule } from '@angular/material/list';
 import { ClienteListComponent } from '../cliente-list/cliente-list.component';
+//Mascara de cpf/cnpj
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
+
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 
 @NgModule({
@@ -21,6 +29,7 @@ import { ClienteListComponent } from '../cliente-list/cliente-list.component';
     SharedModule,
     AccordionModule.forRoot(),
     MatListModule, //material
+    NgxMaskModule.forRoot(maskConfig),
 
   ]
 })

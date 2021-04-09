@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-base-valid-form',
   template: '<div></div>'
 })
-export abstract class BaseValidFormComponent implements OnInit {
+export class BaseValidFormComponent implements OnInit {
 
   //
   formulario: FormGroup = {} as FormGroup;
@@ -37,8 +37,7 @@ export abstract class BaseValidFormComponent implements OnInit {
     }
   }
 
-
-
+  //Verifica se todos os campos estão validos de uma vez, depois que clica no botão de submit
   verificaValidacoesForm(dateInforme: FormGroup)
   {
     Object.keys(dateInforme.controls).forEach(campo => {

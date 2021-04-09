@@ -30,24 +30,25 @@
         <div class="col-xs-12 col-sm-6 col-lg-6">
           <div class="form-group ">
             <label>CPF: </label>
-            <input class="form-control" type="number" formControlName="cpf" id="cpf" name="cpf" >
+            <input class="form-control" type="text"  formControlName="cpf" id="cpf" name="cpf" mask="000.000.000-00">
             <msn-valid cssErro="danger" [control]="formulario.get('cpf')" label="CPF" ></msn-valid>
+            <!--mask="000.000.000-00||00.000.000/0000-00" mask="CPF_CNPJ"-->
           </div>
         </div>
 
         <div class="col-xs-12 col-sm-6 col-lg-6">
           <div class="form-group ">
             <label>E-mail: </label>
-            <input class="form-control" type="email" formControlName="email" id="email" name="email" >
-            <msn-valid cssErro="danger" [control]="formulario.get('email')?.value" label="E-mail" ></msn-valid>
+            <input class="form-control" type="email" formControlName="email" id="email" name="email" (input)="teste($event)" >
+            <msn-valid cssErro="danger" [control]="formulario.get('email')" label="E-mail" ></msn-valid>
           </div>
         </div>
 
         <div class="col-xs-12 col-sm-6 col-lg-6">
           <div class="form-group ">
             <label>Data de Nascimento: </label>
-            <input class="form-control" type="date" formControlName="dataNascimento" id="dataNascimento" name="dataNascimento" >
-            <msn-valid cssErro="danger" [control]="formulario.get('dataNascimento')?.value" label="Data de Nascimento" ></msn-valid>
+            <input class="form-control" type="text" mask="d0/M0/0000" [leadZeroDateTime]="true" formControlName="dataNascimento" id="dataNascimento" name="dataNascimento" >
+            <msn-valid cssErro="danger" [control]="formulario.get('dataNascimento')" label="Data de Nascimento" ></msn-valid>
           </div>
         </div>
       </div>
@@ -56,8 +57,9 @@
         <div class="col-xs-12 col-sm-3 col-lg-3">
           <div class="form-group ">
             <label>CEP: </label>
-            <input class="form-control" type="number" formControlName="cep" id="cep" name="cep" >
-            <msn-valid cssErro="danger" [control]="formulario.get('cep')?.value" label="CEP" ></msn-valid>
+            <input class="form-control" type="text" formControlName="cep" id="cep" name="cep" mask="00.000-000">
+            <msn-valid cssErro="danger" [control]="formulario.get('endereco.cep')" label="CEP" ></msn-valid>
+            <!---->
 
           </div>
         </div>
@@ -66,7 +68,7 @@
           <div class="form-group ">
             <label>Numero: </label>
             <input class="form-control" type="number" formControlName="numero" id="numero" name="numero" >
-            <msn-valid cssErro="danger" [control]="formulario.get('numero')?.value" label="Numero" ></msn-valid>
+            <msn-valid cssErro="danger" [control]="formulario.get('endereco.numero')" label="Numero" ></msn-valid>
 
           </div>
         </div>
@@ -75,7 +77,7 @@
           <div class="form-group ">
             <label>Complemento: </label>
             <input class="form-control" type="text" formControlName="complemento" id="complemento" name="complemento" >
-            <msn-valid cssErro="danger" [control]="formulario.get('complemento')?.value" label="Complemento" ></msn-valid>
+            <msn-valid cssErro="danger" [control]="formulario.get('endereco.complemento')" label="Complemento" ></msn-valid>
 
           </div>
         </div>
@@ -84,7 +86,7 @@
           <div class="form-group ">
             <label>Rua: </label>
             <input class="form-control" type="text" formControlName="rua" id="rua" name="rua" >
-            <msn-valid cssErro="danger" [control]="formulario.get('rua')?.value" label="Rua" ></msn-valid>
+            <msn-valid cssErro="danger" [control]="formulario.get('endereco.rua')" label="Rua" ></msn-valid>
 
           </div>
         </div>
@@ -93,7 +95,7 @@
           <div class="form-group ">
             <label>Bairro: </label>
             <input class="form-control" type="text" formControlName="bairro" id="bairro" name="bairro" >
-            <msn-valid cssErro="danger" [control]="formulario.get('bairro')?.value" label="Bairro" ></msn-valid>
+            <msn-valid cssErro="danger" [control]="formulario.get('endereco.bairro')" label="Bairro" ></msn-valid>
 
           </div>
         </div>
@@ -104,7 +106,7 @@
               <select id="estado" class="form-control" formControlName="estado" >
                 <option *ngFor="let estado of estados " [value]="estado.sigla" > {{estado.nome}}</option>
               </select>
-            <msn-valid cssErro="danger" [control]="formulario.get('estado')?.value" label="Estado" ></msn-valid>
+            <msn-valid cssErro="danger" [control]="formulario.get('endereco.estado')" label="Estado" ></msn-valid>
           </div>
         </div>
 
@@ -114,7 +116,7 @@
               <select id="cidade" class="form-control" formControlName="cidade">
                 <option *ngFor="let cidade of cidades " [value]="cidade.nome" > {{cidade.nome}}</option>
               </select>
-            <msn-valid cssErro="danger" [control]="formulario.get('cidade')?.value" label="Cidade" ></msn-valid>
+            <msn-valid cssErro="danger" [control]="formulario.get('endereco.cidade')" label="Cidade" ></msn-valid>
 
           </div>
         </div>

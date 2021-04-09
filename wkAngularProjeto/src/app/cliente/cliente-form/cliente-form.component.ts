@@ -8,8 +8,11 @@ import { Cliente } from 'src/app/shared/entidades/classes/clienteData';
 import { IEstado } from 'src/app/shared/entidades/interface/IEstado';
 import { ICidade } from 'src/app/shared/entidades/interface/ICidade';
 import { DropdownService } from 'src/app/shared/service/dropdown.service';
-import { map, switchMap, tap } from 'rxjs/operators';
-import { EMPTY } from 'rxjs';
+import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+import { empty, EMPTY } from 'rxjs';
+import { FormValidationsService } from 'src/app/shared/service/form-validations.service';
+import { cepData } from 'src/app/shared/entidades/interface/ICepData';
+import { ConsultaCepService } from 'src/app/shared/service/consulta-cep.service';
 
 
 @Component({
@@ -33,7 +36,9 @@ export class ClienteFormComponent extends BaseValidFormComponent implements OnIn
     private clienteService: ClienteService,
     private clienteDataService: ClienteDataService,
     private dropdownService: DropdownService,
-    private location: Location
+    private location: Location,
+    private valid: FormValidationsService,
+    private cepService: ConsultaCepService
   )
   {super() }
 
@@ -53,11 +58,11 @@ export class ClienteFormComponent extends BaseValidFormComponent implements OnIn
       dataNascimento: ['', [Validators.required]],
 
       endereco: this.formBuilder.group({
-        cep: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
-        numero: ['', Validators.required],
-        complemento: [''],
-        rua: ['', Validators.required],
-        bairro: ['', Validators.required],
+        cep: ['', [Validators.required, this.valid.cepValidator]],
+        numero: ['', [Validators.required, Validators.maxLength(10)]],
+        complemento: ['',Validators.maxLength(20)],
+        rua: ['', [Validators.required, Validators.maxLength(40)]],
+        bairro: ['', [Validators.required,Validators.maxLength(20)]],
         cidade: ['', Validators.required],
         estado: ['', Validators.required]
       }),
@@ -101,9 +106,18 @@ export class ClienteFormComponent extends BaseValidFormComponent implements OnIn
           tap(console.log)
         )
         .subscribe(cidade => this.cidades = cidade);
+
+    // Busca dados usando o cep depois de ter digitado corretamente e completo
+    this.consultaCEP();
+
+
+
   }
 
-
+  teste(evento: any){
+    console.log("ñ sei: ", evento);
+    console.log("campos: ", this.formulario.get('email'));
+  }
 
 
   //Enviando os dados para o banco
@@ -163,5 +177,41 @@ export class ClienteFormComponent extends BaseValidFormComponent implements OnIn
     this.cliente = new Cliente();
     this.location.back();
   }
+
+
+  // Verifica o status do formulario e caso esteja valido, busca o cep!
+  consultaCEP(){
+
+    this.formulario.get('endereco.cep')?.statusChanges
+      .pipe(
+        distinctUntilChanged(),
+        tap(statusValue => console.log('status CEP: ', statusValue)),
+        switchMap(status => status === 'VALID' ?
+        this.cepService.getCep(this.formulario.get('endereco.cep')?.value)
+          : empty()
+        )
+      )
+      .subscribe((data: cepData | any) => this.feedsData(data));
+  }
+
+  //Alimenta os campos de endereço depois de uma busca automatica
+  feedsData(dados: cepData | any){
+
+    this.formulario.patchValue({
+
+      endereco: {
+        complemento: dados?.complemento,
+        rua: dados?.logradouro,
+        bairro: dados?.bairro,
+        cidade: dados?.localidade,
+        estado: dados?.uf
+      }
+    });
+  }
+
+
+
+
+
 
 }
