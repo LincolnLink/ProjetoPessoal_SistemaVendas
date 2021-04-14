@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AlertModalComponent } from './component/alert-modal/alert-modal.component';
+import { ConfirmModalComponent } from './component/confirm-modal/confirm-modal.component';
 
 
 const MATERIAL_MODULES = [
@@ -38,7 +39,8 @@ const MATERIAL_MODULES = [
 @NgModule({
   declarations: [
     MsnValidComponent,
-    AlertModalComponent
+    AlertModalComponent,
+    ConfirmModalComponent
   ],
   exports:[
     ReactiveFormsModule,

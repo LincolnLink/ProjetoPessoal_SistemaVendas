@@ -17,6 +17,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { HttpClientModule } from '@angular/common/http';
 import { CarrinhoComponent } from './pedido-venda/carrinho/carrinho.component';
 import { CheckoutComponent } from './pedido-venda/checkout/checkout.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,8 @@ import { CheckoutComponent } from './pedido-venda/checkout/checkout.component';
     MatListModule, //material
 
     CollapseModule.forRoot(), //ngx-bootstrap
+    ModalModule.forRoot()
+
 
   ],
   providers: [],

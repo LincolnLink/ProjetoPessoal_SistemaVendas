@@ -1,7 +1,7 @@
 
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of, Subscriber, Subscription } from 'rxjs';
+import { Observable, of, Subscriber, Subscription, EMPTY } from 'rxjs';
 import { Produto } from 'src/app/shared/entidades/classes/produtoData';
 import { ProdutoDataService } from 'src/app/shared/service/produto-data.service';
 import { ProdutoService } from 'src/app/shared/service/produto.service';
@@ -9,6 +9,9 @@ import { ProdutoService } from 'src/app/shared/service/produto.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { AlertModalService } from 'src/app/shared/service/alert-modal.service';
+import { switchMap, take } from 'rxjs/operators';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'produto-list',
@@ -23,6 +26,9 @@ export class ProdutoListComponent implements AfterViewInit, OnInit, OnDestroy {
   //Lista de produtos
   Produtos: Produto[] = []
 
+  // Faz parte da modal que confirma quando um curso é deletado!
+  deleteModalRef!: BsModalRef;
+
   //Coluna e valores da tabela
   displayedColumns: string[] = ['CI do produto', 'Nome', 'Valor Unitario', 'actions'];
   dataSource = new MatTableDataSource<Produto>();
@@ -35,6 +41,7 @@ export class ProdutoListComponent implements AfterViewInit, OnInit, OnDestroy {
     private produtoService: ProdutoService,
     private router: Router,
     private route: ActivatedRoute,
+    private alertService: AlertModalService,
   ) { }
 
   ngOnInit(): void {
@@ -65,7 +72,33 @@ export class ProdutoListComponent implements AfterViewInit, OnInit, OnDestroy {
 
    // Deleta o item
   excluir(key: string){
-    this.produtoService.delete(key);
+
+    // Modal de confirmação generica, podendo usar em qualquer component!
+    // Coloca o retorno em uma costante!
+    const result$ = this.alertService.showConfirm("Confirma para excluir", "Tem certeza que deseja deletar esse produto?");
+
+    let valurResult: boolean = false;
+     // Poderia ter feito no método do serviço!
+    // "empty()" não se usa mais, é o EMPTY!
+    const result = result$.asObservable()
+    .subscribe(
+      (success) => {
+        valurResult = success;
+
+        if(valurResult)
+        {
+          valurResult ? this.produtoService.delete(key): EMPTY
+          this.alertService.showAlertSuccess("Deletado com sucesso");
+          this.deleteModalRef.hide();
+        }
+        // else
+        // {
+        //   this.alertService.showAlertDanger("Erro ao deletar o cursos, Tente novamente mais tarde!");
+        //   this.deleteModalRef.hide();
+        // }
+      }
+    )
+
     this.alimentandoTabela(this.Produtos);
   }
 

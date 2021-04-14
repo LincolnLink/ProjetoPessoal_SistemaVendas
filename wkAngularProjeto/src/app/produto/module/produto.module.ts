@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
 //Mascara de cpf/cnpj
 import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
@@ -37,6 +38,7 @@ const maskConfig: Partial<IConfig> = {
     ProdutoRoutingModule,
     SharedModule,
     NgxMaskModule.forRoot(maskConfig),
+    ModalModule.forRoot()
 
   ]
 })
