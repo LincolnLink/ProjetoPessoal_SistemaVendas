@@ -10,7 +10,8 @@ import { MatListModule } from '@angular/material/list';
 import { ClienteListComponent } from '../cliente-list/cliente-list.component';
 //Mascara de cpf/cnpj
 import { NgxMaskModule, IConfig } from 'ngx-mask'
-
+//ngx-bootstrap
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -30,7 +31,7 @@ const maskConfig: Partial<IConfig> = {
     AccordionModule.forRoot(),
     MatListModule, //material
     NgxMaskModule.forRoot(maskConfig),
-
+    ModalModule.forRoot()
   ]
 })
 export class ClienteModule { }

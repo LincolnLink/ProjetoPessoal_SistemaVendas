@@ -7,7 +7,7 @@ import { PedidoVendaListComponent } from '../pedido-venda-list/pedido-venda-list
 import { PeditoVendaRoutingModule } from './pedido-venda-routing';
 import { CarrinhoComponent } from '../carrinho/carrinho.component';
 import { CheckoutComponent } from '../checkout/checkout.component';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
@@ -24,7 +24,8 @@ import { CheckoutComponent } from '../checkout/checkout.component';
   imports: [
     CommonModule,
     PeditoVendaRoutingModule,
-    SharedModule
+    SharedModule,
+    ModalModule.forRoot()
   ],
   entryComponents: [CheckoutComponent]
 })

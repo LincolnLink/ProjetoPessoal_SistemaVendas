@@ -91,11 +91,6 @@ export class ProdutoListComponent implements AfterViewInit, OnInit, OnDestroy {
           this.alertService.showAlertSuccess("Deletado com sucesso");
           this.deleteModalRef.hide();
         }
-        // else
-        // {
-        //   this.alertService.showAlertDanger("Erro ao deletar o cursos, Tente novamente mais tarde!");
-        //   this.deleteModalRef.hide();
-        // }
       }
     )
 

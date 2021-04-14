@@ -4,8 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, Observable } from 'rxjs';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Subscription, Observable, EMPTY } from 'rxjs';
 import { Cliente } from 'src/app/shared/entidades/classes/clienteData';
+import { AlertModalService } from 'src/app/shared/service/alert-modal.service';
 import { ClienteService } from 'src/app/shared/service/cliente.service';
 import { ClienteDataService } from './../../shared/service/cliente-data.service';
 
@@ -22,12 +24,16 @@ export class ClienteListComponent implements AfterViewInit, OnInit {
   //Lista de produtos
   Cliente!: Observable<Cliente[]>;
 
+  //Modal de confirmação do ngx-bootstrap
+  deleteModalRef!: BsModalRef;
+
 
   constructor(
     private contatoDataService: ClienteDataService,
     private clienteService: ClienteService,
     private router: Router,
     private route: ActivatedRoute,
+    private alertService: AlertModalService,
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +49,28 @@ export class ClienteListComponent implements AfterViewInit, OnInit {
 
   // Deleta o item
   excluir(key: string){
-    this.clienteService.delete(key);
+
+    // Modal de confirmação generica, podendo usar em qualquer component!
+    // Coloca o retorno em uma costante!
+    const result$ = this.alertService.showConfirm("Confirma para excluir", "Tem certeza que deseja deletar esse cliente?");
+
+    let valurResult: boolean = false;
+    // Poderia ter feito no método do serviço!
+    // "empty()" não se usa mais, é o EMPTY!
+    const result = result$.asObservable()
+    .subscribe(
+      (success) => {
+        valurResult = success;
+
+        if(valurResult)
+        {
+          valurResult ?  this.clienteService.delete(key): EMPTY
+          this.alertService.showAlertSuccess("Deletado com sucesso");
+          this.deleteModalRef.hide();
+        }
+      }
+    )
+
   }
 
   //informa os dados que vão ser editados
