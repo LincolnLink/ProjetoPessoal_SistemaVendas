@@ -1,6 +1,9 @@
+
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { single } from 'src/assets/dados/graficoBarHor';
 import { pizza } from 'src/assets/dados/graficoPizza';
+
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -48,7 +51,7 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(private viewportScroller: ViewportScroller) { }
 
   ngOnInit(){
     // Dados do banco
@@ -78,6 +81,12 @@ export class HomeComponent implements OnInit {
       this.single = [...this.single]
     }
     this.previousWidthOfResizedDiv = this.resizedDiv.nativeElement.clientWidth;
+  }
+
+
+  //Configurações de ancoras
+  public onClick(elementId: string): void {
+    this.viewportScroller.scrollToAnchor(elementId);
   }
 
 

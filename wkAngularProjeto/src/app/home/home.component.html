@@ -4,15 +4,22 @@
     <mat-card-title>Home (TODO)</mat-card-title>
     <mat-card-subtitle></mat-card-subtitle>
     <mat-card-content>
-      <div class="d-flex">
-        <ul>
-          <li><a routerLink="#work">Barra</a></li>
-          <li><a routerLink="#contact" >Pizza</a></li>
-        </ul>
-      </div>
     </mat-card-content>
   </mat-card-header>
 </mat-card>
+<br>
+<div class="bgGlobal card-borde p-3">
+  <div class="d-flex">
+    <ul>
+      <li class="mb-3">
+        <a class="text-white text-decoration-none" (click)="onClick('work')">Barra</a>
+      </li>
+      <li class="mb-3">
+        <a class="text-white text-decoration-none" (click)="onClick('contact')" >Pizza</a>
+      </li>
+    </ul>
+  </div>
+</div>
 
 
 <br>
