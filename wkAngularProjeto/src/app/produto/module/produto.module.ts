@@ -11,6 +11,7 @@ import {MatCardModule} from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+
 import { MatSelectModule } from '@angular/material/select';
 //btn
 import {MatButtonModule} from '@angular/material/button';
@@ -19,7 +20,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 //Mascara de cpf/cnpj
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -38,7 +39,9 @@ const maskConfig: Partial<IConfig> = {
     ProdutoRoutingModule,
     SharedModule,
     NgxMaskModule.forRoot(maskConfig),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    MatSortModule,
+
 
   ]
 })

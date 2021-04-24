@@ -41,8 +41,8 @@ export class ClienteService {
  }
 
  // Busca todos e depois atualiza o dado especifico
- update(produtos: Cliente, key: string){
-   this.db.list<Cliente>('Cliente').update(key, produtos)
+ update(cli: Cliente, key: string){
+   this.db.list<Cliente>('Cliente').update(key, cli)
    .catch((error: any) => {
      console.log(error);
    });

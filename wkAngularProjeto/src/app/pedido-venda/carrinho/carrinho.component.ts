@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
 import { BaseValidFormComponent } from 'src/app/shared/component/base-valid-form/base-valid-form.component';
 import { Cliente } from 'src/app/shared/entidades/classes/clienteData';
-import { itensCarrinho, Pedido } from 'src/app/shared/entidades/classes/pedidoVendaData';
+import { ICarrinhoItens, Pedido } from 'src/app/shared/entidades/classes/pedidoVendaData';
 import { CarrinhoService } from 'src/app/shared/service/carrinho.service';
 import { ClienteService } from 'src/app/shared/service/cliente.service';
 import { PedidoVendaService } from 'src/app/shared/service/pedido-venda.service';
@@ -22,10 +22,10 @@ export class CarrinhoComponent extends BaseValidFormComponent implements OnInit 
    Cliente!: Observable<Cliente[]>;
 
    //Lista de produtos
-   myOrderItems$!: Observable<itensCarrinho[]>;
+   myOrderItems$!: Observable<ICarrinhoItens[]>;
 
-   //Pedido
-   pedido: Pedido = {} as Pedido;
+   // pedido: Pedido = {} as Pedido;
+   pedido: Pedido = {'cliente':'','dataHora':'','idVenda':'','totalVenda':0, 'listItens': []};
 
   constructor(
     private cartService: CarrinhoService,
@@ -34,6 +34,7 @@ export class CarrinhoComponent extends BaseValidFormComponent implements OnInit 
     private location: Location,
     private pedidoService: PedidoVendaService
   ) { super() }
+
 
   ngOnInit() {
     this.myOrderItems$ = this.cartService.getItems();
@@ -46,7 +47,7 @@ export class CarrinhoComponent extends BaseValidFormComponent implements OnInit 
   }
 
 
-  Remover(item: itensCarrinho){
+  Remover(item: ICarrinhoItens){
     this.cartService.removeItem(item);
     this.myOrderItems$ = this.cartService.getItems();
   }
@@ -64,13 +65,12 @@ export class CarrinhoComponent extends BaseValidFormComponent implements OnInit 
 
     if(this.formulario.valid){
 
-      this.pedido = new Pedido();
 
       // Nome do cliente
       this.pedido.cliente = this.formulario.get('cliente')?.value;
 
       // Lista de produtos
-      this.myOrderItems$.subscribe(i =>  i.forEach(j => this.pedido.listProdutos.push(j)));
+      this.myOrderItems$.subscribe(i =>  i.forEach(j => this.pedido.listItens.push(j)));
 
       // Data e hora
       var d = new Date();
@@ -91,7 +91,7 @@ export class CarrinhoComponent extends BaseValidFormComponent implements OnInit 
       this.location.back();
 
       // Limpa o ultimo produto
-      this.pedido = new Pedido();
+      // this.pedido = new Pedido();
 
     }
     else

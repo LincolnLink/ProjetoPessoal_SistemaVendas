@@ -19,14 +19,11 @@ import { ClienteDataService } from './../../shared/service/cliente-data.service'
 })
 export class ClienteListComponent implements AfterViewInit, OnInit {
 
-
-
   //Lista de produtos
   Cliente!: Observable<Cliente[]>;
 
   //Modal de confirmação do ngx-bootstrap
   deleteModalRef!: BsModalRef;
-
 
   constructor(
     private contatoDataService: ClienteDataService,
@@ -42,7 +39,7 @@ export class ClienteListComponent implements AfterViewInit, OnInit {
   //Depois que carrega o DOM carrega os dados
   ngAfterViewInit() {
 
-    this.Cliente = this.clienteService.getAll2()
+    this.Cliente = this.clienteService.getAll2();
     // .subscribe((i: any) =>{ = i;});
   }
 

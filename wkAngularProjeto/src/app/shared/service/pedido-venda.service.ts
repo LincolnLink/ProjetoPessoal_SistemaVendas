@@ -1,10 +1,14 @@
+import { IProduto } from './../entidades/classes/produtoData';
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { map, pluck } from 'rxjs/operators';
-import { itensCarrinho, Pedido } from '../entidades/classes/pedidoVendaData';
+import { map } from 'rxjs/operators';
+import { ICarrinhoItens, Pedido } from '../entidades/classes/pedidoVendaData';
 import { Produto } from '../entidades/classes/produtoData';
-import { ajax } from 'rxjs/ajax';
+import { ajax, AjaxResponse } from 'rxjs/ajax';
+import { of } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,81 +24,82 @@ export class PedidoVendaService {
     private http: HttpClient
   ) { }
 
-  // Busca todos e com push adiciona o novo na lista
- // Retorna a key do novo caso precise
- insert(cli: Pedido){
-  this.pedidoVenda = cli
+  insert(p: Pedido){
+    this.pedidoVenda = p
 
-  this.db.list<Pedido>('PedidoVenda').push(cli)
-  .then((result: any) => {
-    //Pega o objeto e bota a key que acabou de ganhar!
-    this.pedidoVenda.idVenda = result.key;
-    this.update(this.pedidoVenda, result.key);
-  });
- }
+    this.db.list<Object>('Pedido').push(p)
+    .then((result: any) => {
+      //Pega o objeto e bota a key que acabou de ganhar!
+      this.pedidoVenda.idVenda = result.key;
+      this.update(this.pedidoVenda, result.key);
+    });
+  }
 
- // Busca todos e depois atualiza o dado especifico
- update(pedido: Pedido, key: string){
-  this.db.list<Pedido>('PedidoVenda').update(key, pedido)
-  .catch((error: any) => {
-    console.log(error);
-  });
- }
+
+
+
+
+  // Busca todos e depois atualiza o dado especifico
+  update(pedido: Pedido, key: string){
+    this.db.list<Pedido>('Pedido').update(key, pedido)
+    .catch((error: any) => {
+      console.log(error);
+    });
+  }
 
  // Cria uma copia da lista de todos, e converte para um novo modelo
  getAll(){
-  return this.db.list<Pedido>('PedidoVenda')
+  return this.db.list<Pedido>('Pedido')
   .snapshotChanges()
   .pipe(
     map((changes) =>{
-       return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+        return changes
     })
   );
  }
 
 
- // Cria uma copia da lista de todos, e converte para um novo modelo
  getAll2(){
-  return this.db.list<Pedido>('PedidoVenda')
-  .snapshotChanges()
+  return this.db.list<Pedido>('Pedido').snapshotChanges()
   .pipe(
-    map((changes) =>
-    {
-        console.log("oq tem aki: ", changes);
+    map((changes) =>{
+      return changes.map(c => (
+        {
+          // idVenda: c.idVenda,
+          // dataHora: c.dataHora,
+          // cliente: c.cliente,
+          // totalVenda: c.totalVenda
 
-        return changes.map((c, i) =>
-       {
-          return {
-            idVenda: c.payload.val()?.idVenda,
-            cliente: c.payload.val()?.cliente,
-            dataHora: c.payload.val()?.dataHora,
-            totalVenda: c.payload.val()?.totalVenda,
-            listProdutos: c.payload.val()?.listProdutos
-          } as Pedido
+          idVenda: c.payload.val()?.idVenda,
+          dataHora: c.payload.val()?.dataHora,
+          cliente: c.payload.val()?.cliente,
+          totalVenda: c.payload.val()?.totalVenda,
+          listItens: c.payload.val()?.listItens
 
-          // let user = c.payload.toJSON();
-          // console.log('teste valor: ', user);
-          // return user
+        } as Pedido
+      ));
+    })
+  )}
 
 
 
-        });
-    }
-  )
- )
+  getAll3(){
+    //return this.http.get<Pedido>("https://wkprojeto-default-rtdb.firebaseio.com/PedidoVenda.json")
 
- }
+    return ajax('https://wkprojeto-default-rtdb.firebaseio.com/PedidoVenda.json').subscribe(
+      (simple: AjaxResponse) =>{
 
- getAll3(){
-   //return this.http.get<Pedido>("https://wkprojeto-default-rtdb.firebaseio.com/PedidoVenda.json")
+        const simpleResponse = JSON.stringify(simple.response, null, 2);
+        let testeValor: any = JSON.parse(simpleResponse);
+        // console.log("valor tratado: ", simpleResponse )
+      }
+    );
+  }
 
-   return ajax('https://wkprojeto-default-rtdb.firebaseio.com/PedidoVenda.json');
-
- }
-
- // Informa qual objeto deve ser deletado, usando a key
- delete(key: string){
-  this.db.object(`PedidoVenda/${key}`).remove();
- }
+  // Informa qual objeto deve ser deletado, usando a key
+  delete(key: string){
+    this.db.object(`Pedido/${key}`).remove();
+  }
 
 }

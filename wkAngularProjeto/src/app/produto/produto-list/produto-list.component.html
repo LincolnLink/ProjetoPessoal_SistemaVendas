@@ -11,21 +11,21 @@
 
 <div class="card-responsivo-creat">
 
-  <table mat-table matSort [dataSource]="dataSource" class="full-width-table" >
+  <!-- <table mat-table matSort [dataSource]="dataSource" class="full-width-table" >
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="CI do produto">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> CI do produto </th>
+
+    <ng-container matColumnDef="Id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
       <td mat-cell *matCellDef="let element"> {{element.idProduto}} </td>
     </ng-container>
 
-    <!-- Name Column -->
+
     <ng-container matColumnDef="Nome">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
       <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
+
     <ng-container matColumnDef="Valor Unitario">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor Unitário </th>
       <td mat-cell *matCellDef="let element"> {{element.valorUnitario}} </td>
@@ -43,13 +43,33 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 
+  </table> -->
+  <table class="table bgGlobal">
+    <thead>
+      <tr class="rowgroup">
+        <th role="columnheader" *ngFor="let item of displayedColumns" >
+          {{item}}
+        </th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup">
+      <tr role="row" *ngFor="let item of Produtos">
+        <td role="cell" >{{item.idProduto}}</td>
+        <td role="cell" >{{item.valorUnitario}}</td>
+        <td role="cell" >{{item.nome}}</td>
+        <td role="cell" >
+          <button mat-raised-button color="primary" class="mr-3" (click)="edit(item, item.idProduto)">Editar</button>
+          <button mat-raised-button color="warn" (click)="excluir(item.idProduto)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
   </table>
-  <mat-paginator #paginator
+  <!-- <mat-paginator #paginator
     [length]="5"
     [pageIndex]="0"
     [pageSize]="5"
     [pageSizeOptions]="[3, 5, 10, 20]" showFirstLastButtons>
-  </mat-paginator>
+  </mat-paginator> -->
 
 </div>
 

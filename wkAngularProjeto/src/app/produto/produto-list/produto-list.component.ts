@@ -2,7 +2,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, Subscriber, Subscription, EMPTY } from 'rxjs';
-import { Produto } from 'src/app/shared/entidades/classes/produtoData';
+import { IProduto, Produto } from 'src/app/shared/entidades/classes/produtoData';
 import { ProdutoDataService } from 'src/app/shared/service/produto-data.service';
 import { ProdutoService } from 'src/app/shared/service/produto.service';
 
@@ -30,11 +30,15 @@ export class ProdutoListComponent implements AfterViewInit, OnInit, OnDestroy {
   deleteModalRef!: BsModalRef;
 
   //Coluna e valores da tabela
-  displayedColumns: string[] = ['CI do produto', 'Nome', 'Valor Unitario', 'actions'];
-  dataSource = new MatTableDataSource<Produto>();
+  displayedColumns: string[] = ['Id', 'Nome', 'Valor Unitario', 'actions'];
+  // dataSource = new MatTableDataSource<Produto>();
+
   //Paginação
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  // @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  //Paginação alternativa
+  public paginaAtual = 1;
 
   constructor(
     private contatoDataService: ProdutoDataService,
@@ -51,11 +55,10 @@ export class ProdutoListComponent implements AfterViewInit, OnInit, OnDestroy {
   //Depois que carrega o DOM carrega os dados
   ngAfterViewInit() {
     this.listDestroy = this.produtoService.getAll2()
-    .subscribe(i =>{
-      this.Produtos =i
-      this.alimentandoTabela(this.Produtos)
-      }
-    );
+    .subscribe((i: any) =>{
+      this.Produtos = i
+      // this.alimentandoTabela(this.Produtos)
+    });
   }
 
   // Se desinscrevendo
@@ -64,11 +67,11 @@ export class ProdutoListComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   //Pegando valores da tabela
-  alimentandoTabela(list : Produto[]){
-    this.dataSource = new MatTableDataSource<Produto>(list);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-  }
+  // alimentandoTabela(list : Produto[]){
+  //   this.dataSource = new MatTableDataSource<Produto>(list);
+  //   this.dataSource.sort = this.sort;
+  //   this.dataSource.paginator = this.paginator;
+  // }
 
    // Deleta o item
   excluir(key: string){
@@ -94,7 +97,7 @@ export class ProdutoListComponent implements AfterViewInit, OnInit, OnDestroy {
       }
     )
 
-    this.alimentandoTabela(this.Produtos);
+    // this.alimentandoTabela(this.Produtos);
   }
 
   //informa os dados que vão ser editados

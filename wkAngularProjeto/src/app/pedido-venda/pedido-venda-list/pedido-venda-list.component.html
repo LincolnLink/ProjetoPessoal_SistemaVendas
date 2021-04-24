@@ -10,26 +10,66 @@
 <br>
 
 
-<div *ngFor="let item of Pedido1 | async" class="bgGlobal card-borde mb-3 overflow-hidden">
+<div *ngFor="let item of Pedido$ | async" class="bgGlobal card-borde mb-3 overflow-hidden">
 
   <div class="d-flex flex-wrap mb-3">
 
-      <div class="col-12 col-sm-12 col-lg-12 mb-3 mt-3">
+      <div class="col-12 col-sm-6 col-lg-3 mb-3 mt-3">
         <label class="labelForm">Id da Venda: </label>{{ item.idVenda }}
-
       </div>
-
-      <div class="col-12 col-sm-12 col-lg-12 mb-3 mt-3">
-        <label class="labelForm">Data e Hora da venda: </label>{{ item.dataHora }}
-      </div>
-
-      <div class="col-12 col-sm-12 col-lg-12 mb-3 mt-3">
+      <div class="col-12 col-sm-6 col-lg-3 mb-3 mt-3">
         <label class="labelForm">Identificação do cliente: </label>{{ item.cliente }}
       </div>
-
-      <div class="col-12 col-sm-12 col-lg-12 mb-3 mt-3">
+      <div class="col-12 col-sm-6 col-lg-3 mb-3 mt-3">
+        <label class="labelForm">Data e Hora da venda: </label>{{ item.dataHora }}
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3 mb-3 mt-3">
         <label class="labelForm">Total da venda: </label>{{ item.totalVenda }}
       </div>
+
+      <div *ngFor="let pro of item.listItens"  class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3 mt-3">
+        <div class="card-borde d-flex flex-column overflow-hidden p-3 mb-3" style="background-color: rgb(5 48 56);">
+
+          <div class="d-flex flex-lg-row flex-wrap">
+            <div>
+              <label class="labelForm">Produto: </label>
+            </div>
+            <div>
+              {{ pro.idProduto }}
+            </div>
+          </div>
+
+          <div class="d-flex flex-lg-row flex-wrap">
+            <div>
+              <label class="labelForm">Nome: </label>
+            </div>
+            <div>
+              {{ pro.nomeProduto }}
+            </div>
+          </div>
+
+          <div class="d-flex flex-lg-row flex-wrap">
+            <div>
+              <label class="labelForm">Quantidade: </label>
+            </div>
+            <div>
+              {{ pro.quantidade }}
+            </div>
+          </div>
+
+          <div class="d-flex flex-lg-row flex-wrap">
+            <div>
+              <label class="labelForm">Valor: </label>
+            </div>
+            <div>
+              {{ pro.valorProduto }}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
 
   </div>
 

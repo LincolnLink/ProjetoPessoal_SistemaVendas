@@ -6,7 +6,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Cliente } from './../../shared/entidades/classes/clienteData';
 import { ProdutoService } from 'src/app/shared/service/produto.service';
 import { CarrinhoService } from 'src/app/shared/service/carrinho.service';
-import { Pedido, itensCarrinho } from 'src/app/shared/entidades/classes/pedidoVendaData';
+import { Pedido, ICarrinhoItens } from 'src/app/shared/entidades/classes/pedidoVendaData';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -16,8 +16,12 @@ import { Observable } from 'rxjs';
 })
 export class PedidoVendaFormComponent implements OnInit {
 
-
+  // Modelo de pedido
   pedido: Pedido = {} as Pedido;
+
+  // Modelo de itens do carrinho
+  listItens: ICarrinhoItens = {} as ICarrinhoItens
+
   key: string = '';
 
   //Produtos escolhidos
@@ -86,21 +90,23 @@ export class PedidoVendaFormComponent implements OnInit {
   //Volta para a pagina anterior
   onCancel(){
     // Limpa o ultimo produto
-    this.pedido = new Pedido();
+    // this.pedido = new Pedido();
     this.location.back();
   }
 
   addProduto(pro: Produto ){
 
     // Pega produto
-    let product: itensCarrinho = {} as itensCarrinho;
-    product.nomeProduto = pro.nome;
-    product.valorProduto = pro.valorUnitario;
-    product.idProduto = pro.idProduto;
-    product.quantidade = 1;
+    // let product: itensCarrinho = {} as itensCarrinho;
+    this.listItens = {} as ICarrinhoItens
+
+    this.listItens.nomeProduto = pro.nome;
+    this.listItens.valorProduto = pro.valorUnitario;
+    this.listItens.idProduto = pro.idProduto;
+    this.listItens.quantidade = 1;
 
     //Envia para o banco
-    this.carrinhoService.addItem(product)
+    this.carrinhoService.addItem(this.listItens)
   }
 
 }

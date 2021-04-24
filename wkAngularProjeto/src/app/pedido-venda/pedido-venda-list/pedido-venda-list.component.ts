@@ -17,8 +17,7 @@ import { AlertModalService } from 'src/app/shared/service/alert-modal.service';
 export class PedidoVendaListComponent implements OnInit, AfterViewInit {
 
 
-    Pedido0$!: Observable<any>;
-    Pedido1!: Observable<Pedido[]>;
+    Pedido$!: Observable<Pedido[]>;
 
     //Modal de confirmação do ngx-bootstrap
     deleteModalRef!: BsModalRef;
@@ -30,15 +29,14 @@ export class PedidoVendaListComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private alertService: AlertModalService,) { }
 
-
-    ngAfterViewInit(): void {
-
+    ngOnInit(): void {
     }
 
-    ngOnInit(): void {
+    //Depois que carrega o DOM carrega os dados
+    ngAfterViewInit() {
 
-       this.Pedido1 = this.pedidoService.getAll2()
-
+      this.Pedido$ = this.pedidoService.getAll2();
+      // .subscribe((i: any) =>{ = i;});
     }
 
     // Deleta o item

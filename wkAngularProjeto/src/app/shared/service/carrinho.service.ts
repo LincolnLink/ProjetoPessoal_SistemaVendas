@@ -5,7 +5,7 @@ import {
 
 } from 'rxjs';
 
-import { itensCarrinho} from './../entidades/classes/pedidoVendaData';
+import { ICarrinhoItens} from './../entidades/classes/pedidoVendaData';
 
 
 @Injectable({
@@ -13,59 +13,70 @@ import { itensCarrinho} from './../entidades/classes/pedidoVendaData';
 })
 export class CarrinhoService {
 
-  private subject = new BehaviorSubject<itensCarrinho[]>([]);
+  private subject = new BehaviorSubject<ICarrinhoItens[]>([]);
 
-  private orderItems$: Observable<itensCarrinho[]> = this.subject.asObservable();
+  private orderItems$: Observable<ICarrinhoItens[]> = this.subject.asObservable();
 
   constructor() { }
 
-  getItems(): Observable<itensCarrinho[]>{
+  getItems(): Observable<ICarrinhoItens[]>{
     return this.orderItems$;
   }
 
-  addItem(orderItem: itensCarrinho) {
+  addItem(orderItem: ICarrinhoItens) {
     const orderItems = this.subject.getValue();
 
     const productIndex = orderItems.findIndex(item => item.idProduto === orderItem.idProduto);
 
     if(productIndex >= 0){
 
-      const updatedOrderItem = orderItems[productIndex];
+      orderItems[productIndex].quantidade +=1;
 
-      updatedOrderItem.quantidade +=1;
+      // const updatedOrderItem = orderItems[productIndex];
 
-      const newOrderItems = orderItems.slice(0);
+      // updatedOrderItem.quantidade +=1;
 
-      newOrderItems[productIndex] = {
-        ...orderItems[productIndex],
-        ...updatedOrderItem
-      }
+      // const newOrderItems = orderItems.slice(0);
+
+      // newOrderItems[productIndex] = {
+      //   ...orderItems[productIndex],
+      //   ...updatedOrderItem
+      // }
 
     } else {
-      orderItems.push(orderItem)
+      orderItems.push(orderItem);
     }
     this.subject.next(orderItems);
   }
 
-  removeItem(orderItem: itensCarrinho) {
+  removeItem(orderItem: ICarrinhoItens) {
     let orderItems = this.subject.getValue();
 
     const productIndex = orderItems.findIndex(item => item.idProduto === orderItem.idProduto);
 
     if(productIndex >= 0){
 
-      const updatedOrderItem = orderItems[productIndex];
-
-      updatedOrderItem.quantidade -=1;
-
-      orderItems = orderItems.filter(i => i.idProduto !== orderItem.idProduto);
-
-      const newOrderItems = orderItems.slice(0);
-
-      newOrderItems[productIndex] = {
-        ...orderItems[productIndex],
-        ...updatedOrderItem
+      if( orderItems[productIndex].quantidade == 1){
+        orderItems = orderItems.filter(i => i.idProduto != orderItems[productIndex].idProduto)
       }
+      else
+      {
+        orderItems[productIndex].quantidade -=1;
+      }
+
+
+      // const updatedOrderItem = orderItems[productIndex];
+
+      // updatedOrderItem.quantidade -=1;
+
+      // orderItems = orderItems.filter(i => i.idProduto !== orderItem.idProduto);
+
+      // const newOrderItems = orderItems.slice(0);
+
+      // newOrderItems[productIndex] = {
+      //   ...orderItems[productIndex],
+      //   ...updatedOrderItem
+      // }
 
     }
     this.subject.next(orderItems);

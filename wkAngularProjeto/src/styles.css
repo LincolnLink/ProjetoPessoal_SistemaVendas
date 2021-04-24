@@ -224,8 +224,8 @@ button.mat-icon-button:focus {
 }
 
 
-.labelForm{
-  font-size: 20px;
+.labelForm, th{
+  font-size: 18px;
   font-weight: 500;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   color: rgb(8 198 189 / 98%) !important;
