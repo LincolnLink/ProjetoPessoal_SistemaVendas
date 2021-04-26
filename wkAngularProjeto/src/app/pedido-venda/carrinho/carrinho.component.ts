@@ -8,6 +8,7 @@ import { ICarrinhoItens, Pedido } from 'src/app/shared/entidades/classes/pedidoV
 import { CarrinhoService } from 'src/app/shared/service/carrinho.service';
 import { ClienteService } from 'src/app/shared/service/cliente.service';
 import { PedidoVendaService } from 'src/app/shared/service/pedido-venda.service';
+import { IformCanDeactivade } from 'src/app/shared/entidades/interface/IformCanDeactivade';
 
 
 @Component({
@@ -27,6 +28,8 @@ export class CarrinhoComponent extends BaseValidFormComponent implements OnInit 
    // pedido: Pedido = {} as Pedido;
    pedido: Pedido = {'cliente':'','dataHora':'','idVenda':'','totalVenda':0, 'listItens': []};
 
+  //  private formMudou: boolean = false;
+
   constructor(
     private cartService: CarrinhoService,
     private clienteService: ClienteService,
@@ -44,6 +47,13 @@ export class CarrinhoComponent extends BaseValidFormComponent implements OnInit 
      this.formulario = this.formBuilder.group({
       cliente: ['', [Validators.required]],
     });
+
+    // this.formulario.valueChanges
+    // .subscribe(i => {
+    //   if(i){
+    //     this.formMudou = true;
+    //   }
+    // })
   }
 
 
@@ -61,7 +71,8 @@ export class CarrinhoComponent extends BaseValidFormComponent implements OnInit 
 
   onSubmit(){
 
-    console.log(this.formulario.value)
+    // this.formMudou = false;
+
 
     if(this.formulario.valid){
 
@@ -105,5 +116,23 @@ export class CarrinhoComponent extends BaseValidFormComponent implements OnInit 
   onCancel(){
     this.location.back();
   }
+
+
+  // Logica informa para o usuario que o campo está preenchido e não foi salvo!
+  // Pergunta se ele deseja sair ou não!
+  podeMudarDeRota(){
+
+    // if(this.formMudou) {
+    //   return confirm("Tem certeza que deseja mudar de pagina, valores não foram salvo?");
+    // }
+    // else
+    // {
+    //   return true;
+    // }
+  }
+
+  // podeDesativar() {
+  //   return this.podeMudarDeRota();
+  // }
 
 }

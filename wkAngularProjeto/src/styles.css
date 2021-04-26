@@ -209,21 +209,7 @@ button.mat-icon-button:focus {
   background-color: #af3740;
 }
 
-
-/*mobile*/
-@media (min-width: 425px) {
-/*
-  .btn-link{
-    display: block;
-    height: 100px;
-  }*/
-
-  /* .accordion-toggle{
-
-  } */
-}
-
-
+/*formulario*/
 .labelForm, th{
   font-size: 18px;
   font-weight: 500;
@@ -234,3 +220,12 @@ button.mat-icon-button:focus {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*paginação*/
+.ngx-pagination .disabled {
+  color: rgb(8 198 189 / 98%) !important;
+}
+
+.ngx-pagination a, .ngx-pagination button {
+  color: #fff;
+}

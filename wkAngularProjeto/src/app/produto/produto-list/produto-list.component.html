@@ -53,7 +53,7 @@
       </tr>
     </thead>
     <tbody role="rowgroup">
-      <tr role="row" *ngFor="let item of Produtos">
+      <tr role="row" *ngFor="let item of Produtos | paginate: { itemsPerPage: 3, currentPage: p }">
         <td role="cell" >{{item.idProduto}}</td>
         <td role="cell" >{{item.valorUnitario}}</td>
         <td role="cell" >{{item.nome}}</td>
@@ -62,6 +62,7 @@
           <button mat-raised-button color="warn" (click)="excluir(item.idProduto)">Delete</button>
         </td>
       </tr>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </tbody>
   </table>
   <!-- <mat-paginator #paginator

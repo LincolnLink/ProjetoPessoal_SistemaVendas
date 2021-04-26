@@ -1,3 +1,4 @@
+import { VendaDeactivateGuard } from './../../shared/guard/venda-deactivate.guard';
 import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -18,8 +19,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     PedidoVendaFormComponent,
     CarrinhoComponent,
     CheckoutComponent
-
-
   ],
   imports: [
     CommonModule,
@@ -27,6 +26,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     SharedModule,
     ModalModule.forRoot()
   ],
-  entryComponents: [CheckoutComponent]
+  entryComponents: [CheckoutComponent],
+
 })
 export class PedidoVendaModule { }

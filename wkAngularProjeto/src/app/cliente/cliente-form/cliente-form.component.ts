@@ -13,6 +13,7 @@ import { empty, EMPTY } from 'rxjs';
 import { FormValidationsService } from 'src/app/shared/service/form-validations.service';
 import { cepData } from 'src/app/shared/entidades/interface/ICepData';
 import { ConsultaCepService } from 'src/app/shared/service/consulta-cep.service';
+import { IformCanDeactivade } from 'src/app/shared/entidades/interface/IformCanDeactivade';
 
 
 @Component({
@@ -20,7 +21,7 @@ import { ConsultaCepService } from 'src/app/shared/service/consulta-cep.service'
   templateUrl: './cliente-form.component.html',
   styleUrls: ['./cliente-form.component.css']
 })
-export class ClienteFormComponent extends BaseValidFormComponent implements OnInit {
+export class ClienteFormComponent extends BaseValidFormComponent implements OnInit, IformCanDeactivade {
 
   //dropdown
   estados: IEstado[] = [];
@@ -30,6 +31,7 @@ export class ClienteFormComponent extends BaseValidFormComponent implements OnIn
   cliente: Cliente = {} as Cliente;
   key: string = '';
 
+  private formMudou: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -110,6 +112,13 @@ export class ClienteFormComponent extends BaseValidFormComponent implements OnIn
     // Busca dados usando o cep depois de ter digitado corretamente e completo
     this.consultaCEP();
 
+    this.formulario.valueChanges
+    .subscribe(i => {
+      if(i){
+        this.formMudou = true;
+      }
+    })
+
 
 
   }
@@ -122,6 +131,8 @@ export class ClienteFormComponent extends BaseValidFormComponent implements OnIn
 
   //Enviando os dados para o banco
   onSubmit(){
+
+    this.formMudou = false;
 
     console.log(this.formulario.value)
 
@@ -209,8 +220,22 @@ export class ClienteFormComponent extends BaseValidFormComponent implements OnIn
     });
   }
 
+  // Logica informa para o usuario que o campo está preenchido e não foi salvo!
+  // Pergunta se ele deseja sair ou não!
+  podeMudarDeRota(){
 
+    if(this.formMudou) {
+      return confirm("Tem certeza que deseja mudar de pagina, valores não foram salvo?");
+    }
+    else
+    {
+      return true;
+    }
+  }
 
+  podeDesativar() {
+    return this.podeMudarDeRota();
+  }
 
 
 

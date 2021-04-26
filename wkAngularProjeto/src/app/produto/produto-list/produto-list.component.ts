@@ -12,6 +12,7 @@ import { MatSort } from '@angular/material/sort';
 import { AlertModalService } from 'src/app/shared/service/alert-modal.service';
 import { switchMap, take } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'produto-list',
@@ -38,7 +39,10 @@ export class ProdutoListComponent implements AfterViewInit, OnInit, OnDestroy {
   // @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   //Paginação alternativa
-  public paginaAtual = 1;
+  // public paginaAtual = 1;
+  p: number = 1;
+
+  // contentArray = new Array(90).fill('');
 
   constructor(
     private contatoDataService: ProdutoDataService,
@@ -49,14 +53,15 @@ export class ProdutoListComponent implements AfterViewInit, OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-
+    // this.contentArray = this.contentArray.map((v: string, i: number) => `Content line ${i + 1}`);
+    // this.returnedArray = this.contentArray.slice(0, 10);
   }
 
   //Depois que carrega o DOM carrega os dados
   ngAfterViewInit() {
     this.listDestroy = this.produtoService.getAll2()
     .subscribe((i: any) =>{
-      this.Produtos = i
+      this.Produtos = i;
       // this.alimentandoTabela(this.Produtos)
     });
   }
@@ -116,5 +121,11 @@ export class ProdutoListComponent implements AfterViewInit, OnInit, OnDestroy {
     this.router.navigate(['novo'], {relativeTo: this.route});
   }
 
+
+  pageChanged(event: PageChangedEvent): void {
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.Produtos = this.Produtos.slice(startItem, endItem);
+  }
 
 }

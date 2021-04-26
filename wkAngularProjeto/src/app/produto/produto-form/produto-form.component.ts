@@ -1,22 +1,24 @@
 import { BaseValidFormComponent } from './../../shared/component/base-valid-form/base-valid-form.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Produto } from 'src/app/shared/entidades/classes/produtoData';
 import { ProdutoDataService } from 'src/app/shared/service/produto-data.service';
 import { ProdutoService } from 'src/app/shared/service/produto.service';
+import { IformCanDeactivade } from 'src/app/shared/entidades/interface/IformCanDeactivade';
 
 @Component({
   selector: 'produto-form',
   templateUrl: './produto-form.component.html',
   styleUrls: ['./produto-form.component.css']
 })
-export class ProdutoFormComponent extends BaseValidFormComponent implements OnInit {
+export class ProdutoFormComponent extends BaseValidFormComponent implements OnInit, IformCanDeactivade {
 
 
   produtos: Produto = {} as Produto;
   key: string = '';
 
+  private formMudou: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -49,19 +51,20 @@ export class ProdutoFormComponent extends BaseValidFormComponent implements OnIn
       }
     });
 
-    this.formulario.get('nome')?.valueChanges
+     this.formulario.valueChanges
     .subscribe(i => {
-
-      console.log('valor teste: ', i);
+      if(i){
+        this.formMudou = true;
+      }
     })
 
 
   }
 
-
   //Enviando os dados para o banco
   onSubmit(){
 
+    this.formMudou = false;
 
     if(this.formulario.valid){
 
@@ -104,6 +107,24 @@ export class ProdutoFormComponent extends BaseValidFormComponent implements OnIn
     this.key = '';
     this.produtos = new Produto();
     this.location.back();
+  }
+
+
+  // Logica informa para o usuario que o campo está preenchido e não foi salvo!
+  // Pergunta se ele deseja sair ou não!
+  podeMudarDeRota(){
+
+    if(this.formMudou) {
+      return confirm("Tem certeza que deseja mudar de pagina, valores não foram salvo?");
+    }
+    else
+    {
+      return true;
+    }
+  }
+
+  podeDesativar() {
+    return this.podeMudarDeRota();
   }
 
 }
