@@ -55,8 +55,8 @@
     <tbody role="rowgroup">
       <tr role="row" *ngFor="let item of Produtos | paginate: { itemsPerPage: 3, currentPage: p }">
         <td role="cell" >{{item.idProduto}}</td>
-        <td role="cell" >{{item.valorUnitario}}</td>
         <td role="cell" >{{item.nome}}</td>
+        <td role="cell" >{{item.valorUnitario}}</td>
         <td role="cell" >
           <button mat-raised-button color="primary" class="mr-3" (click)="edit(item, item.idProduto)">Editar</button>
           <button mat-raised-button color="warn" (click)="excluir(item.idProduto)">Delete</button>
