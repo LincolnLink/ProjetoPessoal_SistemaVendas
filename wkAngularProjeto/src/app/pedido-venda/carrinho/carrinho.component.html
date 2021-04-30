@@ -19,7 +19,7 @@
             <select id="cidade" class="form-control" formControlName="cliente">
               <option *ngFor="let cli of Cliente | async" [value]="cli.nome" > {{cli.nome}}</option>
             </select>
-            <msn-valid cssErro="danger" [control]="formulario.get('cidade')?.value" label="Cidade" ></msn-valid>
+            <msn-valid cssErro="danger" [control]="formulario.get('cliente')?.value" label="Cliente" ></msn-valid>
           </div>
         </div>
 

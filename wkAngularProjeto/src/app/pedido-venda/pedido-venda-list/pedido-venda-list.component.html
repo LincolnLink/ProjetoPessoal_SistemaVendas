@@ -24,7 +24,7 @@
         <label class="labelForm">Data e Hora da venda: </label>{{ item.dataHora }}
       </div>
       <div class="col-12 col-sm-6 col-lg-3 mb-3 mt-3">
-        <label class="labelForm">Total da venda: </label>{{ item.totalVenda }}
+        <label class="labelForm">Total da venda: </label>{{ item.totalVenda | number:'00.02'}}
       </div>
 
       <div *ngFor="let pro of item.listItens"  class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3 mt-3">
@@ -62,7 +62,7 @@
               <label class="labelForm">Valor: </label>
             </div>
             <div>
-              {{ pro.valorProduto }}
+              {{ pro.valorProduto | number:'00.02' }}
             </div>
           </div>
 

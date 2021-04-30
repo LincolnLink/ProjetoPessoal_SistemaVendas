@@ -55,6 +55,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
+import { CpfPipe } from './pipe/cpf.pipe';
+import { CepPipe } from './pipe/cep.pipe';
 
 
 const MATERIAL_MODULES = [
@@ -109,7 +111,9 @@ const MATERIAL_MODULES = [
   declarations: [
     MsnValidComponent,
     AlertModalComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    CpfPipe,
+    CepPipe
   ],
   exports:[
     ReactiveFormsModule,
@@ -117,6 +121,8 @@ const MATERIAL_MODULES = [
     MsnValidComponent,
     MATERIAL_MODULES,
     AlertModalComponent,
+    CpfPipe,
+    CepPipe
 
 
 

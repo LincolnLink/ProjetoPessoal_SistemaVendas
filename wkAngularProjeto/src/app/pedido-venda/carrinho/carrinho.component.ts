@@ -9,6 +9,7 @@ import { CarrinhoService } from 'src/app/shared/service/carrinho.service';
 import { ClienteService } from 'src/app/shared/service/cliente.service';
 import { PedidoVendaService } from 'src/app/shared/service/pedido-venda.service';
 import { IformCanDeactivade } from 'src/app/shared/entidades/interface/IformCanDeactivade';
+import { AlertModalService } from 'src/app/shared/service/alert-modal.service';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class CarrinhoComponent extends BaseValidFormComponent implements OnInit 
     private clienteService: ClienteService,
     private formBuilder: FormBuilder,
     private location: Location,
-    private pedidoService: PedidoVendaService
+    private pedidoService: PedidoVendaService,
+    private alertService: AlertModalService,
   ) { super() }
 
 
@@ -98,6 +100,9 @@ export class CarrinhoComponent extends BaseValidFormComponent implements OnInit 
       // Adiciona no banco
       this.pedidoService.insert(this.pedido);
 
+      //limpa carrinho
+      this.limpar();
+
       //Volta para pagina anterior
       this.location.back();
 
@@ -107,8 +112,11 @@ export class CarrinhoComponent extends BaseValidFormComponent implements OnInit 
     }
     else
     {
-      console.log('form invalido ')
+      console.log('form invalido ');
+
       this.verificaValidacoesForm(this.formulario);
+
+      this.alertService.showAlertDanger("Escolha um cliente");
     }
   }
 
