@@ -16,3 +16,6 @@ Tela de Cliente
 
 ![ClienteDesktop](https://user-images.githubusercontent.com/16365468/117496419-66faff00-af4d-11eb-9243-8925753070e3.png)
 
+Tela de Venda
+
+![vendaDesktop](https://user-images.githubusercontent.com/16365468/117496592-a32e5f80-af4d-11eb-8e8b-3c13311f157c.png)
