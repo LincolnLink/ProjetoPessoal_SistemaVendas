@@ -8,8 +8,11 @@ Telas responsivas
 
 ![ClienteMobile](https://user-images.githubusercontent.com/16365468/117496027-d3293300-af4c-11eb-8dc4-1c122a4f0c52.png)
 
-Tela de produto
+Tela de Produto
 
 ![ProdutoDesktop](https://user-images.githubusercontent.com/16365468/117496278-33b87000-af4d-11eb-8732-ce125cd9315a.png)
 
+Tela de Cliente
+
+![ClienteDesktop](https://user-images.githubusercontent.com/16365468/117496419-66faff00-af4d-11eb-9243-8925753070e3.png)
 
