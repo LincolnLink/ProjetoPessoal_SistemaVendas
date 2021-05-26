@@ -6,7 +6,10 @@ import { PedidoVendaComponent } from "../pedido-venda.component";
 
 const routes: Routes = [
 
-  { path: '', component: PedidoVendaComponent },
+  {
+    path: '',
+    component: PedidoVendaComponent
+  },
   {
     path: 'novo',
     component: PedidoVendaFormComponent,

@@ -44,3 +44,16 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+
+environments/
+
+/environments
+
+environments.prod.ts
+
+dist
+
+/dist
+
+dist/
